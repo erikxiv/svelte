@@ -1,4 +1,5 @@
 import svelte from 'rollup-plugin-svelte';
+import json from '@rollup/plugin-json';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
@@ -32,6 +33,7 @@ export default {
     // https://github.com/rollup/rollup-plugin-commonjs
     resolve({ browser: true }),
     commonjs(),
+    json(),
 
     // Watch the `public` directory and refresh the
     // browser on changes when not in production

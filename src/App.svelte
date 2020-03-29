@@ -7,6 +7,10 @@
     const newDate = await res.text();
     date = newDate;
   });
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js');
+  }
 </script>
 
 <main>

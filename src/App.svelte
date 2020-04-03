@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import '@material/mwc-drawer';
   import '@material/mwc-list/mwc-list.js';
   import '@material/mwc-list/mwc-list-item.js';
   import '@material/mwc-menu';
@@ -14,15 +15,6 @@
 
   export let version, things;
 
-  onMount(async () => {
-    // anchor must share a parent with menu that is `position: relative`
-    menu.anchor = menuButton;
-
-    menuButton.addEventListener('click', function (e) {
-      menu.open = true;
-    });
-  });
-
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/service-worker.js');
   }
@@ -33,68 +25,47 @@ mwc-top-app-bar {
   --mdc-theme-primary: white;
   --mdc-theme-on-primary: black;
 }
-
-/* CSS Reset */
-html {
-  box-sizing: border-box;
-  font-size: 16px;
-}
-
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
-body, h1, h2, h3, h4, h5, h6, p, ol, ul {
-  margin: 0;
-  padding: 0;
-  font-weight: normal;
-}
-
-ol, ul {
-  list-style: none;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
 </style>
 
-<mwc-top-app-bar>
-  <mwc-icon-button id="menuButton" icon="menu" slot="navigationIcon"></mwc-icon-button>
-  <!-- Menu -->
-  <mwc-menu id="menu">
-    <Link href="/">
-      <mwc-list-item graphic="avatar" twoline=1>
-        <span>All the things</span>
-        <span slot="secondary">{version}</span>
-        <img src="/favicon.png" alt="logotype" slot="graphic" />
+<mwc-drawer id="drawer" type="modal">
+    <mwc-list on:click={() => drawer.open = false}>
+      <Link href="/">
+        <mwc-list-item graphic="avatar" twoline=1>
+          <span>All the things</span>
+          <span slot="secondary">{version}</span>
+          <img src="/favicon.png" alt="logotype" slot="graphic" />
+        </mwc-list-item>
+      </Link>
+      <li divider role="separator"></li>
+      <mwc-list-item graphic="icon">
+        <slot>FAQ</slot>
+        <mwc-icon slot="graphic">help_outline</mwc-icon>
       </mwc-list-item>
-    </Link>
-    <li divider role="separator"></li>
-    <mwc-list-item graphic="icon">
-      <slot>FAQ</slot>
-      <mwc-icon slot="graphic">help_outline</mwc-icon>
-    </mwc-list-item>
-    <mwc-list-item graphic="icon">
-      <slot>Sign out</slot>
-      <mwc-icon slot="graphic">exit_to_app</mwc-icon>
-    </mwc-list-item>
-  </mwc-menu>
-  <!-- Title -->
-  <div slot="title">{$router.path}</div>
-  <!-- Content -->
-  <div>
-    <Router>
-      <Route exact>
-        <List {things} />
-      </Route>
-      <Route fallback>
-        <Missing />
-      </Route>
-      <Route exact path="/view/:id" let:router>
-        <View thing={things[router.params.id]} />
-      </Route>
-    </Router>
+      <mwc-list-item graphic="icon">
+        <slot>Sign out</slot>
+        <mwc-icon slot="graphic">exit_to_app</mwc-icon>
+      </mwc-list-item>
+    </mwc-list>
+
+  <div slot="appContent">
+    <mwc-top-app-bar>
+      <mwc-icon-button icon="menu" slot="navigationIcon" on:click={() => drawer.open = true}></mwc-icon-button>
+      <!-- Title -->
+      <div slot="title">{$router.path}</div>
+      <!-- Content -->
+    </mwc-top-app-bar>
+      <div>
+        <Router>
+          <Route exact>
+            <List {things} />
+          </Route>
+          <Route fallback>
+            <Missing />
+          </Route>
+          <Route exact path="/view/:id" let:router>
+            <View thing={things[router.params.id]} />
+          </Route>
+        </Router>
+      </div>
   </div>
-</mwc-top-app-bar>
+</mwc-drawer>

@@ -13,6 +13,9 @@
   import Teaser from './Teaser.svelte';
 
   onMount(async () => {
+    if (window.location.href !== '/') {
+      window.location.href = '/';
+    }
     // anchor must share a parent with menu that is `position: relative`
     menu.anchor = menuButton;
 

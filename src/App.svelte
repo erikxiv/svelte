@@ -1,5 +1,6 @@
 <script>
   export let version, data;
+  let href = 'undefined';
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/service-worker.js');
   }
@@ -14,8 +15,9 @@
 
   onMount(async () => {
     if (window.location.href !== '/') {
-      window.location.href = '/';
+      //window.location.href = '/';
     }
+    href = window.location.href;
     // anchor must share a parent with menu that is `position: relative`
     menu.anchor = menuButton;
 
@@ -72,7 +74,7 @@ img {
         <mwc-icon slot="graphic">exit_to_app</mwc-icon>
       </mwc-list-item>
     </mwc-menu>
-  <div slot="title">All the things</div>
+  <div slot="title">{href}</div>
   <div>
     <mwc-list>
       {#each data as thing}

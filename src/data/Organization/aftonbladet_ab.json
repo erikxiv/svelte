@@ -1,0 +1,12 @@
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "Aftonbladet AB",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://gfx.aftonbladet-cdn.se/hyper-assets/912b4c6d5a779af54ee918c5ee6685d3.png",
+    "width": 600,
+    "height": 60
+  },
+  "url": "http://www.aftonbladet.se/"
+}

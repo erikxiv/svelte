@@ -1,0 +1,33 @@
+{
+  "@context": "http://schema.org",
+  "@type": "NewsArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage"
+  },
+  "datePublished": "2019-02-13T14:25:52Z",
+  "dateModified": "2020-04-02T09:54:26Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Nina Kindbro"
+    }
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "name": "Aftonbladet AB",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://gfx.aftonbladet-cdn.se/hyper-assets/912b4c6d5a779af54ee918c5ee6685d3.png",
+      "width": 600,
+      "height": 60
+    }
+  },
+  "headline": "Pasta Alfredo recept – gott med kyckling och ärter",
+  "description": "Pasta Alfredo tillhör kanske inte de smalaste rätterna men ack så god. Med kyckling, krämig pasta och ärtor når den nya nivåer.",
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://imgs.aftonbladet-cdn.se/v2/images/72682494-69bc-4df9-94ea-70f4ef107478?fit=crop&h=653&q=50&w=1000&s=55f002064e93596cb214b84b51c13011a8d6817a",
+    "width": 1000,
+    "height": 653
+  }
+}

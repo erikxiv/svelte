@@ -1,0 +1,65 @@
+{
+  "@context": "http://schema.org/",
+  "@type": "Recipe",
+  "name": "Wok med glasnudlar och kål",
+  "url": "https://www.ica.se/recept/wok-med-glasnudlar-och-kal-726415/",
+  "datePublished": "2020-01-21",
+  "dateModified": "2020-01-16",
+  "author": "ICA Köket",
+  "image": "https://www.ica.se//assets.icanet.se/q_auto,f_auto/imagevaultfiles/id_210863/cf_6901/wok-med-glasnudlar-och-kal-726415-liten.jpg",
+  "description": "En fräsch vegansk wokrätt med glasnudlar och härliga gröna grönsaker som broccoli, spetskål och bladspenat som får smak av ingefära och soja. Krispiga cashewnötter blir pricken över i!",
+  "totalTime": "PT45M",
+  "recipeIngredient": [
+    "250 g glasnudlar",
+    "400 g spetskål",
+    "250 g broccoli",
+    "1 gul lök",
+    "2 dl naturella cashewnötter",
+    "4 msk neutral rapsolja",
+    "1 msk finhackad ingefära",
+    "4 msk japansk soja",
+    "2 msk vitvinsvinäger",
+    "2 påsar bladspenat (à 65 g)"
+  ],
+  "recipeInstructions": [
+    {
+      "@type": "HowToStep",
+      "text": "Koka nudlarna enligt anvisning p&aring; f&ouml;rpackningen."
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Sk&auml;r k&aring;len i grova bitar. Sk&auml;r broccolin i mindre buketter. Skala och strimla l&ouml;ken."
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Hetta upp en stor stek- eller wokpanna. Stek k&aring;l, broccoli och n&ouml;tter i olja p&aring; h&ouml;g v&auml;rme tills de f&aring;r f&auml;rg men fortfarande har kvar krisp.&nbsp;"
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Finhacka ingef&auml;ran. Tills&auml;tt l&ouml;k, soja, vin&auml;ger och ingef&auml;ra och fr&auml;s ytterligare n&aring;gon minut. V&auml;nd ner spenat och nudlar och servera direkt."
+    }
+  ],
+  "cookingMethod": "Wokad",
+  "recipeCategory": "Huvudrätt,Middag",
+  "recipeCuisine": "Asiatisk",
+  "keywords": "",
+  "commentCount": 7,
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": 4.8,
+    "reviewCount": 16
+  },
+  "nutrition": {
+    "@type": "NutritionInformation",
+    "servingSize": "4 Serving",
+    "calories": "",
+    "fatContent": "",
+    "carbohydrateContent": "",
+    "proteinContent": ""
+  },
+  "interactionStatistic": {
+    "@type": "InteractionCounter",
+    "interactionType": "http://schema.org/CommentAction",
+    "userInteractionCount": 7
+  }
+}

@@ -1,5 +1,5 @@
 <script>
-  export let version;
+  export let version, data;
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/service-worker.js');
   }
@@ -8,6 +8,7 @@
   import '@material/mwc-icon';
   import '@material/mwc-icon-button';
   import '@material/mwc-top-app-bar';
+  import Teaser from './Teaser.svelte';
 </script>
 <style>
 mwc-top-app-bar {
@@ -44,18 +45,9 @@ img {
     <mwc-icon-button icon="favorite" slot="actionItems"></mwc-icon-button>
     <div>
 <mwc-list>
-  <mwc-list-item twoline=1>
-    <span>Item 0as</span>
-    <span slot="secondary">asdf line</span>
-  </mwc-list-item>
-  <mwc-list-item twoline=1>
-    <span>Item 1</span>
-    <span slot="secondary">Secondary line</span>
-  </mwc-list-item>
-  <mwc-list-item twoline=1>
-    <span>Item 3</span>
-    <span slot="secondary">Secondary line</span>
-  </mwc-list-item>
+  {#each data as thing}
+    <Teaser {thing} />
+  {/each}
 </mwc-list>
     </div>
 </mwc-top-app-bar>

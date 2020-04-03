@@ -1,0 +1,64 @@
+{
+  "@context": "http://schema.org",
+  "@type": "Recipe",
+  "cookTime": "PT30M",
+  "prepTime": "PT0M",
+  "keywords": "Pastarecept, Italiensk mat, Huvudrätter, Kycklingrecept, Recept, Veckans helgtips",
+  "suitableForDiet": "",
+  "recipeCategory": "Pastarecept, Huvudrätter, Kycklingrecept",
+  "recipeCuisine": "Italiensk mat",
+  "recipeIngredient": [
+    "300 g pasta",
+    "3 kycklingfiléer",
+    "2 vitlöksklyftor",
+    "2.5 dl grädde",
+    "2.5 dl Vatten",
+    "50 g Smör",
+    "250 g parmesanost",
+    "2 dl Ärter, gröna ",
+    "3 krm Salt",
+    "3 krm Peppar"
+  ],
+  "recipeInstructions": [
+    {
+      "@type": "HowToStep",
+      "text": "Koka pastan enligt anvisningar på paketet."
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Skiva kycklingfiléerna och stek dem i lite smält smör så de får färg."
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Riv och fräs vitlöken och tillsätt grädde och vatten. Lägg i smör och låt smälta."
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Koka ärtorna enligt anvisningar på paketet."
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Riv parmesanosten och lägg i pannan och rör om tills osten smält. Salta och peppra. Låt koka ihop och tjockna."
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Blanda ner den avrunna pastan och ärterna i kycklingsåsen eller servera bredvid. Riv över lite parmesanost och vrid ett tag med pepparkvarnen."
+    }
+  ],
+  "recipeYield": "3 portioner",
+  "name": "Pasta Alfredo med kyckling",
+  "description": "Pasta Alfredo tillhör kanske inte de smalaste rätterna men ack så god. Med kyckling, krämig pasta och ärtor når den nya nivåer.",
+  "image": {
+    "@type": "ImageObject",
+    "width": 1000,
+    "height": 653,
+    "url": "https://imgs.aftonbladet-cdn.se/v2/images/72682494-69bc-4df9-94ea-70f4ef107478?fit=crop&h=653&q=50&w=1000&s=55f002064e93596cb214b84b51c13011a8d6817a"
+  },
+  "author": "Nina Kindbro",
+  "datePublished": "2019-02-13T14:25:52Z",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": 3.7,
+    "ratingCount": 136
+  }
+}

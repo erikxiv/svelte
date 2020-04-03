@@ -2,13 +2,14 @@
   export let things;
 
   import '@material/mwc-list/mwc-list.js';
+  import { Link } from 'yrv';
   import Teaser from './Teaser.svelte';
 </script>
 
 <mwc-list>
   {#each things as thing, i}
-    <a href="/view/{i}">
+    <Link href="/view/{i}">
       <Teaser {thing} />
-    </a>
+    </Link>
   {/each}
 </mwc-list>

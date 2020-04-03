@@ -6,19 +6,15 @@
   import '@material/mwc-icon';
   import '@material/mwc-icon-button';
   import '@material/mwc-top-app-bar';
-  import Teaser from './Teaser.svelte';
-  import List from './List.svelte';
-  import Missing from './Missing.svelte';
-  import View from './View.svelte';
-  import router from './router';
+  import { Router, Route, Link, router } from 'yrv';
+  import Teaser from './components/Teaser.svelte';
+  import List from './components/List.svelte';
+  import Missing from './components/Missing.svelte';
+  import View from './components/View.svelte';
 
   export let version, things;
 
-  let path = 'undefined';
-
   onMount(async () => {
-    path = window.location.pathname;
-
     // anchor must share a parent with menu that is `position: relative`
     menu.anchor = menuButton;
 
@@ -68,11 +64,13 @@ img {
   <mwc-icon-button id="menuButton" icon="menu" slot="navigationIcon"></mwc-icon-button>
   <!-- Menu -->
   <mwc-menu id="menu">
-    <mwc-list-item graphic="avatar" twoline=1 on:click|once={e => window.location.href="/"}>
-      <span>All the things</span>
-      <span slot="secondary">{version}</span>
-      <img src="/favicon.png" alt="logotype" slot="graphic" />
-    </mwc-list-item>
+    <Link href="/">
+      <mwc-list-item graphic="avatar" twoline=1>
+        <span>All the things</span>
+        <span slot="secondary">{version}</span>
+        <img src="/favicon.png" alt="logotype" slot="graphic" />
+      </mwc-list-item>
+    </Link>
     <li divider role="separator"></li>
     <mwc-list-item graphic="icon">
       <slot>FAQ</slot>
@@ -84,15 +82,19 @@ img {
     </mwc-list-item>
   </mwc-menu>
   <!-- Title -->
-  <div slot="title">{path}</div>
+  <div slot="title">{$router.path}</div>
   <!-- Content -->
   <div>
-    {#if router.match(/^\/$/)}
-      <List {things} />
-    {:else if router.match(/^\/view\/(?<id>[a-z0-9_\-]+)$/)}
-      <View thing={things[router.param(/^\/view\/(?<id>[a-z0-9_\-]+)$/, 'id')]} />
-    {:else}
-      <Missing />
-    {/if}
+    <Router>
+      <Route exact>
+        <List {things} />
+      </Route>
+      <Route fallback>
+        <Missing />
+      </Route>
+      <Route exact path="/view/:id" let:router>
+        <View thing={things[router.params.id]} />
+      </Route>
+    </Router>
   </div>
 </mwc-top-app-bar>

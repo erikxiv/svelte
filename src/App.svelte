@@ -1,6 +1,6 @@
 <script>
   export let version, data;
-  let href = 'undefined';
+  let path = 'undefined';
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/service-worker.js');
   }
@@ -14,10 +14,10 @@
   import Teaser from './Teaser.svelte';
 
   onMount(async () => {
-    if (window.location.href !== '/') {
-      //window.location.href = '/';
+    if (window.location.pathname !== '/') {
+      //window.location.pathname = '/';
     }
-    href = window.location.href;
+    path = window.location.pathname;
     // anchor must share a parent with menu that is `position: relative`
     menu.anchor = menuButton;
 
@@ -74,7 +74,7 @@ img {
         <mwc-icon slot="graphic">exit_to_app</mwc-icon>
       </mwc-list-item>
     </mwc-menu>
-  <div slot="title">{href}</div>
+  <div slot="title">{path}</div>
   <div>
     <mwc-list>
       {#each data as thing}

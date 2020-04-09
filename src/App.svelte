@@ -45,7 +45,7 @@ mwc-top-app-bar {
         <slot>FAQ</slot>
         <mwc-icon slot="graphic">help_outline</mwc-icon>
       </mwc-list-item>
-      <mwc-list-item graphic="icon">
+      <mwc-list-item graphic="icon" on:click={() => window.location.reload()}>
         <slot>Sign out</slot>
         <mwc-icon slot="graphic">exit_to_app</mwc-icon>
       </mwc-list-item>

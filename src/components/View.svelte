@@ -34,6 +34,7 @@
     return arrayMe(p["schema:rangeIncludes"]).map(o => o["@id"]).includes(t);
   }
   const formatDate = (d) => new Intl.DateTimeFormat('sv-SE').format(d);
+  const textMe = (n) => typeof(n) === "string" ? n : n["schema:text"];
   export let thing, property;
 </script>
 
@@ -79,7 +80,7 @@
       <span class="type mdc-typography--overline">{property["rdfs:label"]}</span>
       <ul class="list">
         {#each thing as item}
-          <li>{item}</li>
+          <li>{textMe(item)}</li>
         {/each}
       </ul>
     </div>

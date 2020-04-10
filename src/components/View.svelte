@@ -5,8 +5,6 @@
   * Pretty
   */
 
-  import '@material/mwc-list/mwc-list.js';
-  import '@material/mwc-list/mwc-list-item.js';
   import jsonld from 'jsonld';
   import recipeSchema from '../schemas/Recipe.json';
   import schemaContext from '../schemas/schemaContext.json';
@@ -35,71 +33,92 @@
     console.log(arrayMe(p["schema:rangeIncludes"]));
     return arrayMe(p["schema:rangeIncludes"]).map(o => o["@id"]).includes(t);
   }
+  const formatDate = (d) => new Intl.DateTimeFormat('sv-SE').format(d);
   export let thing, property;
 </script>
+
+<style>
+  .mdc-layout-grid {
+    padding-top: 0px;
+  }
+  .property .type {
+    display: block;
+    color: rgba(0, 0, 0, 0.54);
+    margin-bottom: -8px;
+  }
+  .property .value {
+    display: block;
+    margin-bottom: 8px;
+  }
+  .property.mdc-card {
+    padding-top: 4px;
+    padding-bottom: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+  ul {
+    list-style: disc;
+    list-style-position: inside;
+  }
+</style>
 
 {#if property}
   {#if typeof(thing) !== "object"}
     {#if rangeIncludes(property, "schema:Duration")}
       <Duration {thing} {property} />
     {:else}
-      <mwc-list-item twoline=1>
-        <span>{thing}</span>
-        <span slot="secondary">
-          {property["rdfs:label"]}. {property["rdfs:comment"]}
-        </span>
-      </mwc-list-item>
+      <div class="property">
+        <span class="type mdc-typography--overline">{property["rdfs:label"]}</span>
+        <span class="value">{thing}</span>
+      </div>
     {/if}
   {:else if Array.isArray(thing)}
-    <li divider role="separator"></li>
-      {#each thing as item}
-        <svelte:self thing={item} property={property} />
-      {/each}
-    <li divider role="separator"></li>
+    <div class="property mdc-card mdc-elevation--z4">
+      <span class="type mdc-typography--overline">{property["rdfs:label"]}</span>
+      <ul class="list">
+        {#each thing as item}
+          <li>{item}</li>
+        {/each}
+      </ul>
+    </div>
   {:else}
     {#if thing["@type"] === "schema:Date"}
-      <mwc-list-item twoline=1>
-        <span>{new Date(thing["@value"])}</span>
-        <span slot="secondary">
-          {property["rdfs:label"]}. {property["rdfs:comment"]}
-        </span>
-      </mwc-list-item>
+      <div class="property">
+        <span class="type mdc-typography--overline">{property["rdfs:label"]}</span>
+        <span class="value">{formatDate(new Date(thing["@value"]))}</span>
+      </div>
     {:else if !thing["@type"] && property["@id"] === "schema:image"}
-      <mwc-list-item graphic="large" twoline=1>
-        <img slot="graphic" src={thing["@id"]} alt={property["rdfs:label"]} />
-        <span>{property["rdfs:label"]}</span>
-        <span slot="secondary">
-          {property["rdfs:label"]}. {property["rdfs:comment"]}
-        </span>
-      </mwc-list-item>
+      <div class="property">
+        <span class="type mdc-typography--overline">{property["rdfs:label"]}</span>
+        <img src={thing["@id"]} alt={property["rdfs:label"]} />
+      </div>
     {:else if !thing["@type"] && rangeIncludes(property, "schema:URL")}
-      <mwc-list-item twoline=1>
-        <span>{thing["@id"]}</span>
-        <span slot="secondary">
-          {property["rdfs:label"]}. {property["rdfs:comment"]}
-        </span>
-      </mwc-list-item>
+      <div class="property">
+        <span class="type mdc-typography--overline">{property["rdfs:label"]}</span>
+        <span class="value">{thing["@id"]}</span>
+      </div>
     {:else}
-      <mwc-list-item twoline=1>
-        <span>{console.log(property, thing) || property["rdfs:label"]} <strong>{thing["@type"]}</strong></span>
-        <span slot="secondary">
-          {#each arrayMe(property["schema:rangeIncludes"]).map(p => p["@id"]) as range}
-            &gt;{range}
-          {/each}
-          {property["rdfs:comment"]}
-        </span>
-      </mwc-list-item>
+      <div class="property">
+        <span class="type mdc-typography--overline">{console.log(property, thing) || property["rdfs:label"]}</span>
+        <span class="value">{thing["@type"]}</span>
+      </div>
     {/if}
   {/if}
 {:else}
 {#await jsonld.compact(thing, { "@context": { "schema": "http://schema.org/" }}) then compact}
-  <mwc-list>
-    {#each recipeSchema['@graph'].filter(n => n["@type"] == "rdf:Property") as property}
-      {#if compact[property["@id"]]}
-        <svelte:self thing={compact[property["@id"]]} property={property} />
-      {/if}
-    {/each}
-  </mwc-list>
+  <div class="mdc-layout-grid mdc-typography">
+    <div class="mdc-layout-grid__inner">
+      <div class="mdc-layout-grid__cell">
+        {#each recipeSchema['@graph'].filter(n => n["@type"] == "rdf:Property") as property}
+          {#if compact[property["@id"]]}
+            <svelte:self thing={compact[property["@id"]]} property={property} />
+          {/if}
+        {/each}
+      </div>
+    </div>
+  </div>
   <pre>
     {console.log(compact) || ""}
   </pre>

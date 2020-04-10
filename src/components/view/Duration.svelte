@@ -15,9 +15,19 @@
   };
 </script>
 
-<mwc-list-item twoline=1>
-  <span>{humanReadableDuration(thing)}</span>
-  <span slot="secondary">
-    <i>{property["rdfs:label"]}</i> {property["rdfs:comment"]}
-  </span>
-</mwc-list-item>
+<style>
+  .property .type {
+    display: block;
+    color: rgba(0, 0, 0, 0.54);
+    margin-bottom: -8px;
+  }
+  .property .value {
+    display: block;
+    margin-bottom: 8px;
+  }
+</style>
+
+<div class="property">
+  <span class="type mdc-typography--overline">{property["rdfs:label"]}</span>
+  <span class="value">{humanReadableDuration(thing)}</span>
+</div>

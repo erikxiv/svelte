@@ -58,6 +58,8 @@
     padding-right: 16px;
     margin-top: 12px;
     margin-bottom: 12px;
+    margin-left: -16px;
+    margin-right: -16px;
   }
   ul {
     list-style: disc;
@@ -76,9 +78,9 @@
       </div>
     {/if}
   {:else if Array.isArray(thing)}
-    <div class="property mdc-card mdc-elevation--z4">
+    <div class="property">
       <span class="type mdc-typography--overline">{property["rdfs:label"]}</span>
-      <ul class="list">
+      <ul class="list value">
         {#each thing as item}
           <li>{textMe(item)}</li>
         {/each}
@@ -101,7 +103,7 @@
         <span class="value">{thing["@id"]}</span>
       </div>
     {:else}
-      <div class="property">
+      <div class="property mdc-card mdc-elevation--z4">
         <span class="type mdc-typography--overline">{console.log(property, thing) || property["rdfs:label"]}</span>
         <span class="value">{thing["@type"]}</span>
       </div>

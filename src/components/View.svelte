@@ -8,6 +8,7 @@
   import jsonld from 'jsonld';
   import recipeSchema from '../schemas/Recipe.json';
   import schemaContext from '../schemas/schemaContext.json';
+  import schema from '../schema';
   import Duration from './view/Duration.svelte';
 
   const CONTEXTS = {
@@ -114,7 +115,7 @@
   <div class="mdc-layout-grid mdc-typography">
     <div class="mdc-layout-grid__inner">
       <div class="mdc-layout-grid__cell">
-        {#each recipeSchema['@graph'].filter(n => n["@type"] == "rdf:Property") as property}
+        {#each schema.getSchemaForClass(compact["@type"])['@graph'].filter(n => n["@type"] == "rdf:Property") as property}
           {#if compact[property["@id"]]}
             <svelte:self thing={compact[property["@id"]]} property={property} />
           {/if}

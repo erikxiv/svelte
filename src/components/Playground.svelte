@@ -1,7 +1,7 @@
 <script>
   import '@material/mwc-list/mwc-list.js';
   import Teaser from './Teaser.svelte';
-  // import schema from '../schemas/schema.json';
+  import schemaJson from '../schemas/schema.json';
   import schema_ttl from '../schemas/schema.ttl';
   import factory from '@graphy/core.data.factory';
   import dataset from '@graphy/memory.dataset.fast';
@@ -9,6 +9,8 @@
   import cf from 'clownface';
   import namespace from '@rdfjs/namespace';
   import Serializer from '@rdfjs/serializer-jsonld-ext';
+
+  import s from '../schema';
 
   const dc = namespace("http://purl.org/dc/elements/1.1/");
   const dcterms = namespace("http://purl.org/dc/terms/");

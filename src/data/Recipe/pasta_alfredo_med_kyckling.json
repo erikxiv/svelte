@@ -1,13 +1,87 @@
 {
-  "@context": "http://schema.org",
-  "@type": "Recipe",
-  "cookTime": "PT30M",
-  "prepTime": "PT0M",
-  "keywords": "Pastarecept, Italiensk mat, Huvudrätter, Kycklingrecept, Recept, Veckans helgtips",
-  "suitableForDiet": "",
-  "recipeCategory": "Pastarecept, Huvudrätter, Kycklingrecept",
-  "recipeCuisine": "Italiensk mat",
-  "recipeIngredient": [
+  "@context": {
+    "as": "https://www.w3.org/ns/activitystreams#",
+    "csvw": "http://www.w3.org/ns/csvw#",
+    "cat": "http://www.w3.org/ns/dcat#",
+    "cc": "http://creativecommons.org/ns#",
+    "cnt": "http://www.w3.org/2008/content#",
+    "ctag": "http://commontag.org/ns#",
+    "dc": "http://purl.org/dc/terms/",
+    "dc11": "http://purl.org/dc/elements/1.1/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "dqv": "http://www.w3.org/ns/dqv#",
+    "duv": "https://www.w3.org/TR/vocab-duv#",
+    "earl": "http://www.w3.org/ns/earl#",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "gldp": "http://www.w3.org/ns/people#",
+    "gr": "http://purl.org/goodrelations/v1#",
+    "grddl": "http://www.w3.org/2003/g/data-view#",
+    "ht": "http://www.w3.org/2006/http#",
+    "ical": "http://www.w3.org/2002/12/cal/icaltzd#",
+    "ldp": "http://www.w3.org/ns/ldp#",
+    "ma": "http://www.w3.org/ns/ma-ont#",
+    "oa": "http://www.w3.org/ns/oa#",
+    "odrl": "http://www.w3.org/ns/odrl/2/",
+    "og": "http://ogp.me/ns#",
+    "org": "http://www.w3.org/ns/org#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "ptr": "http://www.w3.org/2009/pointers#",
+    "qb": "http://purl.org/linked-data/cube#",
+    "rev": "http://purl.org/stuff/rev#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfa": "http://www.w3.org/ns/rdfa#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "rif": "http://www.w3.org/2007/rif#",
+    "rr": "http://www.w3.org/ns/r2rml#",
+    "schema": "http://schema.org/",
+    "sd": "http://www.w3.org/ns/sparql-service-description#",
+    "sioc": "http://rdfs.org/sioc/ns#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "skosxl": "http://www.w3.org/2008/05/skos-xl#",
+    "ssn": "http://www.w3.org/ns/ssn/",
+    "sosa": "http://www.w3.org/ns/sosa/",
+    "time": "http://www.w3.org/2006/time#",
+    "v": "http://rdf.data-vocabulary.org/#",
+    "vcard": "http://www.w3.org/2006/vcard/ns#",
+    "void": "http://rdfs.org/ns/void#",
+    "wdr": "http://www.w3.org/2007/05/powder#",
+    "wdrs": "http://www.w3.org/2007/05/powder-s#",
+    "xhv": "http://www.w3.org/1999/xhtml/vocab#",
+    "xml": "http://www.w3.org/XML/1998/namespace",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "describedby": "http://www.w3.org/2007/05/powder-s#describedby",
+    "license": "http://www.w3.org/1999/xhtml/vocab#license",
+    "role": "http://www.w3.org/1999/xhtml/vocab#role"
+  },
+  "@type": "schema:Recipe",
+  "schema:aggregateRating": {
+    "@type": "schema:AggregateRating",
+    "schema:ratingCount": 136,
+    "schema:ratingValue": 3.7
+  },
+  "schema:author": "Nina Kindbro",
+  "schema:cookTime": "PT30M",
+  "schema:datePublished": {
+    "@type": "schema:Date",
+    "@value": "2019-02-13T14:25:52Z"
+  },
+  "schema:description": "Pasta Alfredo tillhör kanske inte de smalaste rätterna men ack så god. Med kyckling, krämig pasta och ärtor når den nya nivåer.",
+  "schema:image": {
+    "@type": "schema:ImageObject",
+    "schema:height": 653,
+    "schema:url": {
+      "@id": "https://imgs.aftonbladet-cdn.se/v2/images/72682494-69bc-4df9-94ea-70f4ef107478?fit=crop&h=653&q=50&w=1000&s=55f002064e93596cb214b84b51c13011a8d6817a"
+    },
+    "schema:width": 1000
+  },
+  "schema:keywords": "Pastarecept, Italiensk mat, Huvudrätter, Kycklingrecept, Recept, Veckans helgtips",
+  "schema:name": "Pasta Alfredo med kyckling",
+  "schema:prepTime": "PT0M",
+  "schema:recipeCategory": "Pastarecept, Huvudrätter, Kycklingrecept",
+  "schema:recipeCuisine": "Italiensk mat",
+  "schema:recipeIngredient": [
     "300 g pasta",
     "3 kycklingfiléer",
     "2 vitlöksklyftor",
@@ -19,46 +93,32 @@
     "3 krm Salt",
     "3 krm Peppar"
   ],
-  "recipeInstructions": [
+  "schema:recipeInstructions": [
     {
-      "@type": "HowToStep",
-      "text": "Koka pastan enligt anvisningar på paketet."
+      "@type": "schema:HowToStep",
+      "schema:text": "Koka pastan enligt anvisningar på paketet."
     },
     {
-      "@type": "HowToStep",
-      "text": "Skiva kycklingfiléerna och stek dem i lite smält smör så de får färg."
+      "@type": "schema:HowToStep",
+      "schema:text": "Skiva kycklingfiléerna och stek dem i lite smält smör så de får färg."
     },
     {
-      "@type": "HowToStep",
-      "text": "Riv och fräs vitlöken och tillsätt grädde och vatten. Lägg i smör och låt smälta."
+      "@type": "schema:HowToStep",
+      "schema:text": "Riv och fräs vitlöken och tillsätt grädde och vatten. Lägg i smör och låt smälta."
     },
     {
-      "@type": "HowToStep",
-      "text": "Koka ärtorna enligt anvisningar på paketet."
+      "@type": "schema:HowToStep",
+      "schema:text": "Koka ärtorna enligt anvisningar på paketet."
     },
     {
-      "@type": "HowToStep",
-      "text": "Riv parmesanosten och lägg i pannan och rör om tills osten smält. Salta och peppra. Låt koka ihop och tjockna."
+      "@type": "schema:HowToStep",
+      "schema:text": "Riv parmesanosten och lägg i pannan och rör om tills osten smält. Salta och peppra. Låt koka ihop och tjockna."
     },
     {
-      "@type": "HowToStep",
-      "text": "Blanda ner den avrunna pastan och ärterna i kycklingsåsen eller servera bredvid. Riv över lite parmesanost och vrid ett tag med pepparkvarnen."
+      "@type": "schema:HowToStep",
+      "schema:text": "Blanda ner den avrunna pastan och ärterna i kycklingsåsen eller servera bredvid. Riv över lite parmesanost och vrid ett tag med pepparkvarnen."
     }
   ],
-  "recipeYield": "3 portioner",
-  "name": "Pasta Alfredo med kyckling",
-  "description": "Pasta Alfredo tillhör kanske inte de smalaste rätterna men ack så god. Med kyckling, krämig pasta och ärtor når den nya nivåer.",
-  "image": {
-    "@type": "ImageObject",
-    "width": 1000,
-    "height": 653,
-    "url": "https://imgs.aftonbladet-cdn.se/v2/images/72682494-69bc-4df9-94ea-70f4ef107478?fit=crop&h=653&q=50&w=1000&s=55f002064e93596cb214b84b51c13011a8d6817a"
-  },
-  "author": "Nina Kindbro",
-  "datePublished": "2019-02-13T14:25:52Z",
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": 3.7,
-    "ratingCount": 136
-  }
+  "schema:recipeYield": "3 portioner",
+  "schema:suitableForDiet": ""
 }

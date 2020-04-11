@@ -111,20 +111,18 @@
     {/if}
   {/if}
 {:else}
-{#await jsonld.compact(thing, { "@context": { "schema": "http://schema.org/" }}) then compact}
   <div class="mdc-layout-grid mdc-typography">
     <div class="mdc-layout-grid__inner">
       <div class="mdc-layout-grid__cell">
-        {#each schema.getSchemaForClass(compact["@type"])['@graph'].filter(n => n["@type"] == "rdf:Property") as property}
-          {#if compact[property["@id"]]}
-            <svelte:self thing={compact[property["@id"]]} property={property} />
+        {#each schema.getSchemaForClass(thing["@type"])['@graph'].filter(n => n["@type"] == "rdf:Property") as property}
+          {#if thing[property["@id"]]}
+            <svelte:self thing={thing[property["@id"]]} property={property} />
           {/if}
         {/each}
       </div>
     </div>
   </div>
   <pre>
-    {console.log(compact) || ""}
+    {console.log(thing) || ""}
   </pre>
-{/await}
 {/if}

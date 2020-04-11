@@ -8,6 +8,7 @@
   import '@material/mwc-menu';
   import '@material/mwc-top-app-bar';
   import { Router, Route, Link, router } from 'yrv';
+  import Edit from './components/Edit.svelte';
   import List from './components/List.svelte';
   import Missing from './components/Missing.svelte';
   import Playground from './components/Playground.svelte';
@@ -65,6 +66,9 @@ mwc-top-app-bar {
           </Route>
           <Route fallback>
             <Missing />
+          </Route>
+          <Route exact path="/edit/:id" let:router>
+            <Edit thing={things[router.params.id]} />
           </Route>
           <Route exact path="/view/:id" let:router>
             <View thing={things[router.params.id]} />

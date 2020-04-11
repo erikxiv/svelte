@@ -11,6 +11,8 @@
     "@material/mwc-icon-button": "^0.14.1",
     "@material/mwc-list": "^0.14.1",
     "@material/mwc-menu": "^0.14.1",
+    "@material/mwc-textarea": "^0.14.1",
+    "@material/mwc-textfield": "^0.14.1",
     "@material/mwc-top-app-bar": "^0.14.1",
     "@rdfjs/namespace": "^1.1.0",
     "@rdfjs/serializer-jsonld-ext": "^2.0.0",

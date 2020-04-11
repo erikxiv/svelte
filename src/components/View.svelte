@@ -31,7 +31,6 @@
 
   const arrayMe = (n) => Array.isArray(n) ? n : [n];
   const rangeIncludes = (p, t) => {
-    console.log(arrayMe(p["schema:rangeIncludes"]));
     return arrayMe(p["schema:rangeIncludes"]).map(o => o["@id"]).includes(t);
   }
   const formatDate = (d) => new Intl.DateTimeFormat('sv-SE').format(d);
@@ -98,6 +97,11 @@
         <span class="type mdc-typography--overline">{property["rdfs:label"]}</span>
         <img src={thing["@id"]} alt={property["rdfs:label"]} />
       </div>
+    {:else if thing["@type"] === "schema:ImageObject"}
+      <div class="property">
+        <span class="type mdc-typography--overline">{property["rdfs:label"]}</span>
+        <img src={thing["schema:url"]["@id"]} alt={property["rdfs:label"]} />
+      </div>
     {:else if !thing["@type"] && rangeIncludes(property, "schema:URL")}
       <div class="property">
         <span class="type mdc-typography--overline">{property["rdfs:label"]}</span>
@@ -105,8 +109,14 @@
       </div>
     {:else}
       <div class="property mdc-card mdc-elevation--z4">
-        <span class="type mdc-typography--overline">{console.log(property, thing) || property["rdfs:label"]}</span>
-        <span class="value">{thing["@type"]}</span>
+        <span class="type mdc-typography--overline">{property["rdfs:label"]}</span>
+        <span class="value">
+          {#each schema.getSchemaForClass(thing["@type"])['@graph'].filter(n => n["@type"] == "rdf:Property") as property}
+            {#if thing[property["@id"]]}
+              <svelte:self thing={thing[property["@id"]]} property={property} />
+            {/if}
+          {/each}
+        </span>
       </div>
     {/if}
   {/if}
@@ -122,7 +132,4 @@
       </div>
     </div>
   </div>
-  <pre>
-    {console.log(thing) || ""}
-  </pre>
 {/if}

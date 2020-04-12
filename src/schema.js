@@ -23,13 +23,15 @@ const getProperties = (nodes) => {
     return [];
   }
   if (Array.isArray(nodes)) {
+    // retur nodes.sort().map(getProperties)
     return nodes.reduce((acc, curr) => {
       return [...acc, ...getProperties(curr)];
     }, []);
   }
   return schema["@graph"]
     .filter(n => n["@type"] === "rdf:Property")
-    .filter(n => array(n["schema:domainIncludes"]).map(n => n["@id"]).includes(nodes));
+    .filter(n => array(n["schema:domainIncludes"]).map(n => n["@id"]).includes(nodes))
+    .sort((a,b) => a["@id"].localeCompare(b["@id"]));
 }
 
 const getSchemaForClass = (node) => {

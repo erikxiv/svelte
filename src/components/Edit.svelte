@@ -5,6 +5,7 @@
   export let thing;
   const allClasses = schema.getAllClasses(thing["@type"]);
   const properties = allClasses.map(n => ({"@graph":schema.getProperties(n)}));
+  console.log(thing);
 </script>
 
 <style>

@@ -8,4 +8,4 @@
   mwc-textfield { margin-bottom: 8px; }
 </style>
 
-<mwc-textfield label={type} {value}></mwc-textfield>
+<mwc-textfield label={type} {value} iconTrailing="delete"></mwc-textfield>

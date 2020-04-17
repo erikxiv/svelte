@@ -1,6 +1,6 @@
 <script>
   export let things;
-  let dialog;
+  let dialog, open = false;
 
   import '@material/mwc-fab';
   import '@material/mwc-list/mwc-list.js';
@@ -14,7 +14,7 @@
   import EditStatementDialog from './EditStatementDialog.svelte';
   import Teaser from './Teaser.svelte';
 
-  const openDialog = () => dialog.open = true;
+  const openDialog = () => open = true;
   const autolist = [
     { text: 'erik', value: 'erik'},
     { text: 'kattis', value: 'kattis'},
@@ -26,10 +26,12 @@
     position: fixed;
     right: 50px;
     bottom: 50px;
+    --mdc-theme-secondary: white;
+    --mdc-theme-on-secondary: black;
   }
 </style>
 
-<mwc-fab icon="favorite" on:click={openDialog}></mwc-fab>
+<mwc-fab icon="add" on:click={openDialog}></mwc-fab>
 <mwc-list>
   {#each things as thing, i}
     <Link href="/view/{i}">
@@ -38,4 +40,4 @@
   {/each}
 </mwc-list>
 
-<EditStatementDialog bind:this={dialog} />
+<EditStatementDialog bind:this={dialog} {open} />

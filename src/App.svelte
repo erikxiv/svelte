@@ -36,7 +36,7 @@ mwc-top-app-bar {
     <mwc-list on:click={closeDrawer}>
       <Link href="/">
         <mwc-list-item graphic="avatar" twoline=1>
-          <span>All the things</span>
+          <span>Evergraph</span>
           <span slot="secondary">{version}</span>
           <img src="/favicon.png" alt="logotype" slot="graphic" />
         </mwc-list-item>

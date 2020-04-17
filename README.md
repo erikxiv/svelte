@@ -1,3 +1,3 @@
-# All the things
+# Evergraph
 
-https://all-the-things.erikxiv.now.sh/
+https://evergraph.me

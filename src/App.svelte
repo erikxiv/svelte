@@ -38,7 +38,7 @@ mwc-top-app-bar {
         <mwc-list-item graphic="avatar" twoline=1>
           <span>Evergraph</span>
           <span slot="secondary">{version}</span>
-          <img src="/favicon.png" alt="logotype" slot="graphic" />
+          <img src="/favicon.svg" alt="logotype" slot="graphic" />
         </mwc-list-item>
       </Link>
       <li divider role="separator"></li>

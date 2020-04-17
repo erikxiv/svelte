@@ -30,6 +30,7 @@
     vertical-align: center;
     vertical-align: middle;
     display: inline;
+    cursor: pointer;
   }
 </style>
 
@@ -39,7 +40,7 @@
   {:else}
     <div class="typed" title={property["rdfs:comment"]}>
       <span class="type mdc-typography--overline">{property["rdfs:label"]}</span>
-      <button class="button" on:click|once={add(property)}><mwc-icon>add_box</mwc-icon></button>
+      <span class="button" on:click|once={add(property)}><mwc-icon>add_box</mwc-icon></span>
     </div>
   {/if}
 {/each}

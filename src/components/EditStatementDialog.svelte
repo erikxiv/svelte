@@ -15,7 +15,11 @@
   import { dialogIsOpen } from '../stores.js';
   import schema from '../schema';
 
-  const autolist = schema.getProperties().map(p => ({
+  const allPredicates = schema.getProperties().map(p => ({
+    text: p["rdfs:label"],
+    value: p["@id"],
+  }));
+  const allResources = schema.getResources().map(p => ({
     text: p["rdfs:label"],
     value: p["@id"],
   }));
@@ -42,22 +46,9 @@
 
 <mwc-dialog bind:this={dialog} heading="Add statement" on:closed={() => dialogIsOpen.update(() => false)}>
   <div>
-    <paper-autocomplete bind:this={subject} label="subject" text="New thing"></paper-autocomplete>
-    <paper-autocomplete bind:this={predicate}
-      on:keydown|stopPropagation={() => false}
-      label="predicate" source={autolist} showResultsOnFocus="true">
-  <template autocomplete-custom-template=1>
-    <paper-item on-tap="_onSelect" id$="[[_getSuggestionId(index)]]" role="option" aria-selected="false">
-      <style>
-        /** Styles for your custom template here **/
-      </style>
-
-      YOUR CUSTOM TEMPLATE
-      <paper-ripple></paper-ripple>
-    </paper-item>
-  </template>
-      </paper-autocomplete>
-    <paper-autocomplete bind:this={object} label="object"></paper-autocomplete>
+    <paper-autocomplete bind:this={subject} label="subject" on:keydown|stopPropagation={() => false} text="New thing"></paper-autocomplete>
+    <paper-autocomplete bind:this={predicate} label="predicate" on:keydown|stopPropagation={() => false} source={allPredicates} showResultsOnFocus="true"></paper-autocomplete>
+    <paper-autocomplete bind:this={object} label="object" on:keydown|stopPropagation={() => false} source={allResources} showResultsOnFocus="true"></paper-autocomplete>
   </div>
   <mwc-button
       dialogAction="Next"

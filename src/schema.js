@@ -31,6 +31,12 @@ const getProperties = (nodes) => {
     .sort((a,b) => a["@id"].localeCompare(b["@id"]));
 }
 
+const getResources = () => {
+  return schema["@graph"]
+    .filter(n => !!n["@id"])
+    .sort((a,b) => a["@id"].localeCompare(b["@id"]));
+}
+
 const getSchemaForClass = (node) => {
   const allClasses = getAllClasses(node);
   const allProperties = getProperties(allClasses);
@@ -43,5 +49,6 @@ export default {
   findById,
   getAllClasses,
   getProperties,
+  getResources,
   getSchemaForClass,
 }

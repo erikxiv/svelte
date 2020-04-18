@@ -1,5 +1,5 @@
 <script>
-  export let open = false;
+  let dialog;
 
   import '@material/mwc-fab';
   import '@material/mwc-list/mwc-list.js';
@@ -11,6 +11,13 @@
   import 'paper-autocomplete/paper-autocomplete.js';
   import { Link } from 'yrv';
   import Teaser from './Teaser.svelte';
+  import { dialogIsOpen } from '../stores.js';
+
+  dialogIsOpen.subscribe(value => {
+    if (dialog) {
+      dialog.open = value;
+    }
+  });
 
   const autolist = [
     { text: 'erik', value: 'erik'},
@@ -27,7 +34,7 @@
   }
 </style>
 
-<mwc-dialog heading="Add statement" {open}>
+<mwc-dialog bind:this={dialog} heading="Add statement" on:closed={() => dialogIsOpen.update(() => false)}>
   <div>
     <paper-autocomplete label="subject" readonly="true" text="New thing"></paper-autocomplete>
     <paper-autocomplete

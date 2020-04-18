@@ -19,9 +19,6 @@ const getAllClasses = (nodes) => {
 }
 
 const getProperties = (nodes) => {
-  if (! nodes) {
-    return [];
-  }
   if (Array.isArray(nodes)) {
     // retur nodes.sort().map(getProperties)
     return nodes.reduce((acc, curr) => {
@@ -30,7 +27,7 @@ const getProperties = (nodes) => {
   }
   return schema["@graph"]
     .filter(n => n["@type"] === "rdf:Property")
-    .filter(n => array(n["schema:domainIncludes"]).map(n => n["@id"]).includes(nodes))
+    .filter(n => typeof(nodes) === 'undefined' || array(n["schema:domainIncludes"]).map(n => n["@id"]).includes(nodes))
     .sort((a,b) => a["@id"].localeCompare(b["@id"]));
 }
 

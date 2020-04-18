@@ -31,7 +31,7 @@
       }
     });
 
-    dialogIsOpen.update(() => true);
+    // dialogIsOpen.update(() => true);
   });
 </script>
 

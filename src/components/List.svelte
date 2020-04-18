@@ -15,10 +15,6 @@
   import { dialogIsOpen } from '../stores.js';
 
   const openDialog = () => dialogIsOpen.update(() => true);
-  const autolist = [
-    { text: 'erik', value: 'erik'},
-    { text: 'kattis', value: 'kattis'},
-  ];
 </script>
 
 <style>

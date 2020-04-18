@@ -1,0 +1,346 @@
+{
+  "@context": {
+    "as": "https://www.w3.org/ns/activitystreams#",
+    "csvw": "http://www.w3.org/ns/csvw#",
+    "cat": "http://www.w3.org/ns/dcat#",
+    "cc": "http://creativecommons.org/ns#",
+    "cnt": "http://www.w3.org/2008/content#",
+    "ctag": "http://commontag.org/ns#",
+    "dc": "http://purl.org/dc/terms/",
+    "dc11": "http://purl.org/dc/elements/1.1/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "default": "https://evergraph.me/default#",
+    "dqv": "http://www.w3.org/ns/dqv#",
+    "duv": "https://www.w3.org/TR/vocab-duv#",
+    "earl": "http://www.w3.org/ns/earl#",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "gldp": "http://www.w3.org/ns/people#",
+    "gr": "http://purl.org/goodrelations/v1#",
+    "grddl": "http://www.w3.org/2003/g/data-view#",
+    "ht": "http://www.w3.org/2006/http#",
+    "ical": "http://www.w3.org/2002/12/cal/icaltzd#",
+    "ldp": "http://www.w3.org/ns/ldp#",
+    "ma": "http://www.w3.org/ns/ma-ont#",
+    "oa": "http://www.w3.org/ns/oa#",
+    "odrl": "http://www.w3.org/ns/odrl/2/",
+    "og": "http://ogp.me/ns#",
+    "org": "http://www.w3.org/ns/org#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "ptr": "http://www.w3.org/2009/pointers#",
+    "qb": "http://purl.org/linked-data/cube#",
+    "rev": "http://purl.org/stuff/rev#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfa": "http://www.w3.org/ns/rdfa#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "rif": "http://www.w3.org/2007/rif#",
+    "rr": "http://www.w3.org/ns/r2rml#",
+    "schema": "http://schema.org/",
+    "sd": "http://www.w3.org/ns/sparql-service-description#",
+    "sioc": "http://rdfs.org/sioc/ns#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "skosxl": "http://www.w3.org/2008/05/skos-xl#",
+    "ssn": "http://www.w3.org/ns/ssn/",
+    "sosa": "http://www.w3.org/ns/sosa/",
+    "time": "http://www.w3.org/2006/time#",
+    "v": "http://rdf.data-vocabulary.org/#",
+    "vcard": "http://www.w3.org/2006/vcard/ns#",
+    "void": "http://rdfs.org/ns/void#",
+    "wdr": "http://www.w3.org/2007/05/powder#",
+    "wdrs": "http://www.w3.org/2007/05/powder-s#",
+    "xhv": "http://www.w3.org/1999/xhtml/vocab#",
+    "xml": "http://www.w3.org/XML/1998/namespace",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "describedby": "http://www.w3.org/2007/05/powder-s#describedby",
+    "license": "http://www.w3.org/1999/xhtml/vocab#license",
+    "role": "http://www.w3.org/1999/xhtml/vocab#role"
+  },
+  "@graph": [
+    {
+      "@id": "default:b",
+      "@type": "schema:Recipe",
+      "schema:aggregateRating": {
+        "@id": "_:b1"
+      },
+      "schema:author": "Nina Kindbro",
+      "schema:cookTime": "PT30M",
+      "schema:datePublished": {
+        "@type": "schema:Date",
+        "@value": "2019-02-13T14:25:52Z"
+      },
+      "schema:description": "Pasta Alfredo tillhör kanske inte de smalaste rätterna men ack så god. Med kyckling, krämig pasta och ärtor når den nya nivåer.",
+      "schema:image": {
+        "@id": "_:b2"
+      },
+      "schema:keywords": "Pastarecept, Italiensk mat, Huvudrätter, Kycklingrecept, Recept, Veckans helgtips",
+      "schema:name": "Pasta Alfredo med kyckling",
+      "schema:prepTime": "PT0M",
+      "schema:recipeCategory": "Pastarecept, Huvudrätter, Kycklingrecept",
+      "schema:recipeCuisine": "Italiensk mat",
+      "schema:recipeIngredient": [
+        "300 g pasta",
+        "3 kycklingfiléer",
+        "2 vitlöksklyftor",
+        "2.5 dl grädde",
+        "2.5 dl Vatten",
+        "50 g Smör",
+        "250 g parmesanost",
+        "2 dl Ärter, gröna ",
+        "3 krm Salt",
+        "3 krm Peppar"
+      ],
+      "schema:recipeInstructions": [
+        {
+          "@id": "_:b3"
+        },
+        {
+          "@id": "_:b4"
+        },
+        {
+          "@id": "_:b5"
+        },
+        {
+          "@id": "_:b6"
+        },
+        {
+          "@id": "_:b7"
+        },
+        {
+          "@id": "_:b8"
+        }
+      ],
+      "schema:recipeYield": "3 portioner",
+      "schema:suitableForDiet": ""
+    },
+    {
+      "@id": "_:b1",
+      "@type": "schema:AggregateRating",
+      "schema:ratingCount": 136,
+      "schema:ratingValue": 3.7
+    },
+    {
+      "@id": "_:b2",
+      "@type": "schema:ImageObject",
+      "schema:height": 653,
+      "schema:url": {
+        "@id": "https://imgs.aftonbladet-cdn.se/v2/images/72682494-69bc-4df9-94ea-70f4ef107478?fit=crop&h=653&q=50&w=1000&s=55f002064e93596cb214b84b51c13011a8d6817a"
+      },
+      "schema:width": 1000
+    },
+    {
+      "@id": "_:b3",
+      "@type": "schema:HowToStep",
+      "schema:text": "Koka pastan enligt anvisningar på paketet."
+    },
+    {
+      "@id": "_:b4",
+      "@type": "schema:HowToStep",
+      "schema:text": "Skiva kycklingfiléerna och stek dem i lite smält smör så de får färg."
+    },
+    {
+      "@id": "_:b5",
+      "@type": "schema:HowToStep",
+      "schema:text": "Riv och fräs vitlöken och tillsätt grädde och vatten. Lägg i smör och låt smälta."
+    },
+    {
+      "@id": "_:b6",
+      "@type": "schema:HowToStep",
+      "schema:text": "Koka ärtorna enligt anvisningar på paketet."
+    },
+    {
+      "@id": "_:b7",
+      "@type": "schema:HowToStep",
+      "schema:text": "Riv parmesanosten och lägg i pannan och rör om tills osten smält. Salta och peppra. Låt koka ihop och tjockna."
+    },
+    {
+      "@id": "_:b8",
+      "@type": "schema:HowToStep",
+      "schema:text": "Blanda ner den avrunna pastan och ärterna i kycklingsåsen eller servera bredvid. Riv över lite parmesanost och vrid ett tag med pepparkvarnen."
+    },
+    {
+      "@id": "default:a",
+      "@type": "schema:Recipe",
+      "schema:aggregateRating": {
+        "@id": "_:a1"
+      },
+      "schema:author": "ICA Köket",
+      "schema:commentCount": 7,
+      "schema:cookingMethod": "Wokad",
+      "schema:dateModified": {
+        "@type": "schema:Date",
+        "@value": "2020-01-16"
+      },
+      "schema:datePublished": {
+        "@type": "schema:Date",
+        "@value": "2020-01-21"
+      },
+      "schema:description": "En fräsch vegansk wokrätt med glasnudlar och härliga gröna grönsaker som broccoli, spetskål och bladspenat som får smak av ingefära och soja. Krispiga cashewnötter blir pricken över i!",
+      "schema:image": {
+        "@id": "https://www.ica.se//assets.icanet.se/q_auto,f_auto/imagevaultfiles/id_210863/cf_6901/wok-med-glasnudlar-och-kal-726415-liten.jpg"
+      },
+      "schema:interactionStatistic": {
+        "@id": "_:a2"
+      },
+      "schema:keywords": "",
+      "schema:name": "Wok med glasnudlar och kål",
+      "schema:nutrition": {
+        "@id": "_:a3"
+      },
+      "schema:recipeCategory": "Huvudrätt,Middag",
+      "schema:recipeCuisine": "Asiatisk",
+      "schema:recipeIngredient": [
+        "250 g glasnudlar",
+        "400 g spetskål",
+        "250 g broccoli",
+        "1 gul lök",
+        "2 dl naturella cashewnötter",
+        "4 msk neutral rapsolja",
+        "1 msk finhackad ingefära",
+        "4 msk japansk soja",
+        "2 msk vitvinsvinäger",
+        "2 påsar bladspenat (à 65 g)"
+      ],
+      "schema:recipeInstructions": [
+        {
+          "@id": "_:a4"
+        },
+        {
+          "@id": "_:a5"
+        },
+        {
+          "@id": "_:a6"
+        },
+        {
+          "@id": "_:a7"
+        }
+      ],
+      "schema:totalTime": "PT45M",
+      "schema:url": {
+        "@id": "https://www.ica.se/recept/wok-med-glasnudlar-och-kal-726415/"
+      }
+    },
+    {
+      "@id": "_:a1",
+      "@type": "schema:AggregateRating",
+      "schema:ratingValue": 4.8,
+      "schema:reviewCount": 16
+    },
+    {
+      "@id": "_:a2",
+      "@type": "schema:InteractionCounter",
+      "schema:interactionType": "http://schema.org/CommentAction",
+      "schema:userInteractionCount": 7
+    },
+    {
+      "@id": "_:a3",
+      "@type": "schema:NutritionInformation",
+      "schema:calories": "",
+      "schema:carbohydrateContent": "",
+      "schema:fatContent": "",
+      "schema:proteinContent": "",
+      "schema:servingSize": "4 Serving"
+    },
+    {
+      "@id": "_:a4",
+      "@type": "schema:HowToStep",
+      "schema:text": "Koka nudlarna enligt anvisning på förpackningen."
+    },
+    {
+      "@id": "_:a5",
+      "@type": "schema:HowToStep",
+      "schema:text": "Skär kålen i grova bitar. Skär broccolin i mindre buketter. Skala och strimla löken."
+    },
+    {
+      "@id": "_:a6",
+      "@type": "schema:HowToStep",
+      "schema:text": "Hetta upp en stor stek- eller wokpanna. Stek kål, broccoli och nötter i olja på hög värme tills de får färg men fortfarande har kvar krisp."
+    },
+    {
+      "@id": "_:a7",
+      "@type": "schema:HowToStep",
+      "schema:text": "Finhacka ingefäran. Tillsätt lök, soja, vinäger och ingefära och fräs ytterligare någon minut. Vänd ner spenat och nudlar och servera direkt."
+    },
+    {
+      "@id": "default:c",
+      "@type": "schema:Organization",
+      "schema:logo": {
+        "@id": "_:c1"
+      },
+      "schema:name": "Aftonbladet AB",
+      "schema:url": {
+        "@id": "http://www.aftonbladet.se/"
+      }
+    },
+    {
+      "@id": "_:c1",
+      "@type": "schema:ImageObject",
+      "schema:height": 60,
+      "schema:url": {
+        "@id": "https://gfx.aftonbladet-cdn.se/hyper-assets/912b4c6d5a779af54ee918c5ee6685d3.png"
+      },
+      "schema:width": 600
+    },
+    {
+      "@id": "default:d",
+      "@type": "schema:NewsArticle",
+      "schema:author": {
+        "@id": "_:d1"
+      },
+      "schema:dateModified": {
+        "@type": "schema:Date",
+        "@value": "2020-04-02T09:54:26Z"
+      },
+      "schema:datePublished": {
+        "@type": "schema:Date",
+        "@value": "2019-02-13T14:25:52Z"
+      },
+      "schema:description": "Pasta Alfredo tillhör kanske inte de smalaste rätterna men ack så god. Med kyckling, krämig pasta och ärtor når den nya nivåer.",
+      "schema:headline": "Pasta Alfredo recept – gott med kyckling och ärter",
+      "schema:image": {
+        "@id": "_:d2"
+      },
+      "schema:mainEntityOfPage": {
+        "@id": "_:d3"
+      },
+      "schema:publisher": {
+        "@id": "_:d4"
+      }
+    },
+    {
+      "@id": "_:d1",
+      "@type": "schema:Person",
+      "schema:name": "Nina Kindbro"
+    },
+    {
+      "@id": "_:d2",
+      "@type": "schema:ImageObject",
+      "schema:height": 653,
+      "schema:url": {
+        "@id": "https://imgs.aftonbladet-cdn.se/v2/images/72682494-69bc-4df9-94ea-70f4ef107478?fit=crop&h=653&q=50&w=1000&s=55f002064e93596cb214b84b51c13011a8d6817a"
+      },
+      "schema:width": 1000
+    },
+    {
+      "@id": "_:d3",
+      "@type": "schema:WebPage"
+    },
+    {
+      "@id": "_:d4",
+      "@type": "schema:Organization",
+      "schema:logo": {
+        "@id": "_:d5"
+      },
+      "schema:name": "Aftonbladet AB"
+    },
+    {
+      "@id": "_:d5",
+      "@type": "schema:ImageObject",
+      "schema:height": 60,
+      "schema:url": {
+        "@id": "https://gfx.aftonbladet-cdn.se/hyper-assets/912b4c6d5a779af54ee918c5ee6685d3.png"
+      },
+      "schema:width": 600
+    }
+  ]
+}

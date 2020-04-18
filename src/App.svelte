@@ -14,8 +14,15 @@
   import Playground from './components/Playground.svelte';
   import Teaser from './components/Teaser.svelte';
   import View from './components/View.svelte';
+  import { localGraph } from './stores.js';
+  import { flattened } from './data';
 
-  export let version, things;
+  export let version;
+  let things = [];
+
+  localGraph.subscribe(value => {
+    things = value["@graph"].filter(n => n["@id"] && !n["@id"].startsWith("_"));
+  });
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/service-worker.js');
@@ -23,6 +30,7 @@
 
   const openDrawer = () => drawer.open = true;
   const closeDrawer = () => drawer.open = false;
+  const loadExampleData = () => localGraph.update(() => flattened);
 </script>
 
 <style>
@@ -45,6 +53,10 @@ mwc-top-app-bar {
       <mwc-list-item graphic="icon">
         <slot>FAQ</slot>
         <mwc-icon slot="graphic">help_outline</mwc-icon>
+      </mwc-list-item>
+      <mwc-list-item graphic="icon" on:click={loadExampleData}>
+        <slot>Load example data</slot>
+        <mwc-icon slot="graphic">system_update</mwc-icon>
       </mwc-list-item>
       <mwc-list-item graphic="icon" on:click={() => window.location.reload()}>
         <slot>Sign out</slot>

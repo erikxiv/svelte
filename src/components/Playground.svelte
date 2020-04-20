@@ -2,10 +2,7 @@
   import '@material/mwc-list/mwc-list.js';
   import Teaser from './Teaser.svelte';
   import schemaJson from '../schemas/schema.json';
-  import schema_ttl from '../schemas/schema.ttl';
-  import factory from '@graphy/core.data.factory';
   import dataset from '@graphy/memory.dataset.fast';
-  import ttl_read from '@graphy/content.ttl.read';
   import cf from 'clownface';
   import namespace from '@rdfjs/namespace';
   import Serializer from '@rdfjs/serializer-jsonld-ext';
@@ -52,24 +49,6 @@
     }
     return graph.namedNode(nodes).out([rdfs.label, rdfs.comment]).values;
   }
-
-ttl_read(schema_ttl, {
-    // whew! simplified inline events style  ;)
-    data(y_quad) {
-        ds.add(y_quad);
-    },
-
-    eof(h_prefixes) {
-        console.log('done!');
-        console.log(graph.namedNode(schema.Recipe).out([rdfs.label, rdfs.comment]).values);
-
-const context = {
-  '@vocab': 'http://schema.org/',
-  ex: 'http://example.org/'
-}
-
-    },
-});
 
 </script>
 

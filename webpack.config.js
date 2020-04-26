@@ -8,6 +8,15 @@ module.exports = {
   entry: {
     bundle: ['./src/main.js']
   },
+  externals: {
+    '@trust/webcrypto': 'crypto',
+    'fs': 'null-fs',
+    'isomorphic-fetch': 'fetch',
+    'node-fetch': 'fetch',
+    'solid-auth-cli': 'null',
+    'text-encoding': 'TextEncoder',
+    'whatwg-url': 'window',
+  },
   resolve: {
     alias: {
       svelte: path.resolve('node_modules', 'svelte')

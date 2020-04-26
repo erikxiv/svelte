@@ -9,20 +9,38 @@
   import '@material/mwc-radio';
   import '@material/mwc-formfield';
   import 'paper-autocomplete/paper-autocomplete.js';
+  import '@polymer/iron-form/iron-form.js';
+  import rdfext from 'rdf-ext';
   import { onMount } from 'svelte';
   import { Link } from 'yrv';
   import Teaser from './Teaser.svelte';
   import { dialogIsOpen } from '../stores.js';
-  import schema from '../schema';
+  import documents from '../documents';
+  import { RDF, RDFS, SCHEMA } from '../namespaces';
 
-  const allPredicates = schema.getProperties().map(p => ({
-    text: p["rdfs:label"],
-    value: p["@id"],
-  }));
-  const allResources = schema.getResources().map(p => ({
-    text: p["rdfs:label"],
-    value: p["@id"],
-  }));
+  const schema = documents.getDocumentByPrefix('schema');
+  const doc = documents.getDocumentByPrefix('default');
+
+  const allPredicates = [];
+  const allResources = [];
+  // const allPredicates = schema.getProperties().map(p => ({
+  //   text: p["@id"],
+  //   value: p["@id"],
+  // }));
+  // const allResources = schema.getResources().map(p => ({
+  //   text: p["@id"],
+  //   value: p["@id"],
+  // }));
+
+  const submit = () => {
+    // Some validation of input first
+    if (!subject.validate() || !predicate.validate() || !object.validate()) {
+      return false;
+    }
+
+    // TODO: Add statement
+    return true;
+  }
 
   onMount(async () => {
     dialogIsOpen.subscribe(value => {
@@ -46,13 +64,32 @@
 
 <mwc-dialog bind:this={dialog} heading="Add statement" on:closed={() => dialogIsOpen.update(() => false)}>
   <div>
-    <paper-autocomplete bind:this={subject} label="subject" on:keydown|stopPropagation={() => false} text="New thing"></paper-autocomplete>
-    <paper-autocomplete bind:this={predicate} label="predicate" on:keydown|stopPropagation={() => false} source={allPredicates} showResultsOnFocus="true"></paper-autocomplete>
-    <paper-autocomplete bind:this={object} label="object" on:keydown|stopPropagation={() => false} source={allResources} showResultsOnFocus="true"></paper-autocomplete>
+    <iron-form><form>
+    <paper-autocomplete
+      bind:this={subject}
+      label="subject"
+      required="true"
+      on:keydown|stopPropagation={() => false}
+      text="[]"></paper-autocomplete>
+    <paper-autocomplete
+      bind:this={predicate}
+      label="predicate"
+      source={allPredicates}
+      required="true"
+      on:keydown|stopPropagation={() => false}
+      showResultsOnFocus="true"></paper-autocomplete>
+    <paper-autocomplete
+      bind:this={object}
+      label="object"
+      source={allResources}
+      required="true"
+      on:keydown|stopPropagation={() => object.validate()}
+      showResultsOnFocus="true"></paper-autocomplete>
+  </form></iron-form>
   </div>
   <mwc-button
       dialogAction="Next"
-      slot="primaryAction">
+      slot="primaryAction" on:click={(e) => submit() || e.stopPropagation()}>
     ok
   </mwc-button>
   <mwc-button

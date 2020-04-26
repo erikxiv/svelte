@@ -3,9 +3,6 @@
   import Iterator from './edit/Iterator.svelte';
 
   export let thing;
-  const allClasses = schema.getAllClasses(thing["@type"]);
-  const properties = allClasses.map(n => ({"@graph":schema.getProperties(n)}));
-  console.log(thing);
 </script>
 
 <style>
@@ -18,10 +15,7 @@
   <div class="mdc-layout-grid__inner">
     <div class="mdc-layout-grid__cell">
       <p><a href={window.location.pathname.replace("edit", "view")}>View</a></p>
-      {#each allClasses as type, i}
-        <h2>{type}</h2>
-        <Iterator {thing} schema={properties[i]} />
-      {/each}
+      <Iterator {thing} />
     </div>
   </div>
 </div>

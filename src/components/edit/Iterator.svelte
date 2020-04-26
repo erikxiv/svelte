@@ -1,13 +1,19 @@
 <script>
   import '@material/mwc-icon';
   import Selector from './Selector.svelte';
+  import documents from '../../documents';
+  import { RDF, RDFS } from '../../namespaces';
 
-  export let schema, thing;
-  const properties = schema['@graph'].filter(n => n["@type"] == "rdf:Property");
+  export let thing;
+  // const properties = schema['@graph'].filter(n => n["@type"] == "rdf:Property");
+  const schema = documents.getDocumentByPrefix('schema');
+  const doc = documents.getDocumentByPrefix('default');
+  const schemaProperties = schema.match(null, RDF.type, RDF.Property).toArray().map(q => q.subject);
+  const thingProperties = doc.match(thing).toArray().map(q => q.predicate);
   const add = (property) => () => {
     console.log("clicked", property);
-    thing[property["@id"]] = "";
-    thing = thing;
+    // thing[property["@id"]] = "";
+    // thing = thing;
   };
 </script>
 
@@ -34,12 +40,12 @@
   }
 </style>
 
-{#each properties as property}
-  {#if thing && typeof(thing[property["@id"]]) !== 'undefined'}
-    <Selector thing={thing[property["@id"]]} property={property} />
+{#each schemaProperties as property}
+  {#if thing && thingProperties.includes(property)}
+    <Selector thing={doc.match(thing, property).toArray()[0].object} property={property} />
   {:else}
-    <div class="typed" title={property["rdfs:comment"]}>
-      <span class="type mdc-typography--overline">{property["rdfs:label"]}</span>
+    <div class="typed" title={schema.match(property, RDFS.comment).toArray()[0].object.value}>
+      <span class="type mdc-typography--overline">{schema.match(property, RDFS.label).toArray()[0].object.value}</span>
       <span class="button" on:click|once={add(property)}><mwc-icon>add_box</mwc-icon></span>
     </div>
   {/if}

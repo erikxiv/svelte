@@ -14,15 +14,22 @@
   import Playground from './components/Playground.svelte';
   import Teaser from './components/Teaser.svelte';
   import View from './components/View.svelte';
-  import { localGraph } from './stores.js';
+  import { current, load } from './documents.js';
   import { flattened } from './data';
+  import documents from './documents';
+  import { RDF } from './namespaces';
 
   export let version;
-  let things = [];
 
-  localGraph.subscribe(value => {
-    things = value["@graph"].filter(n => n["@id"] && !n["@id"].startsWith("_"));
-  });
+  let things = [];
+  const doc = documents.getDocumentByPrefix('default');
+  doc.then(doc => {
+    things = doc.match(null, RDF.type).toArray().map(q => q.subject);
+  })
+
+  // localGraph.subscribe(value => {
+  //   things = value["@graph"].filter(n => n["@id"] && !n["@id"].startsWith("_"));
+  // });
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/service-worker.js');

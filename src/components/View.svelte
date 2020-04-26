@@ -1,5 +1,4 @@
 <script>
-  import schema from '../schema';
   import Iterator from './view/Iterator.svelte';
 
   export let thing;
@@ -15,7 +14,7 @@
   <div class="mdc-layout-grid__inner">
     <div class="mdc-layout-grid__cell">
       <a href={window.location.pathname.replace("view", "edit")}>Edit</a>
-      <Iterator {thing} schema={schema.getSchemaForClass(thing["@type"])} />
+      <Iterator {thing} />
     </div>
   </div>
 </div>

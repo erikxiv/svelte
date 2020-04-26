@@ -1,12 +1,20 @@
 <script>
+  // import { getProperties, schema } from '../../schema';
   import Selector from './Selector.svelte';
+  import documents from '../../documents';
+  import { RDF, RDFS } from '../../namespaces';
 
-  export let schema, thing;
+  export let thing;
+
+  const schema = documents.getDocumentByPrefix('schema');
+  const doc = documents.getDocumentByPrefix('default');
+  const schemaProperties = schema.match(null, RDF.type, RDF.Property).toArray().map(q => q.subject);
+  const thingProperties = doc.match(thing).toArray().map(q => q.predicate);
 </script>
 
-{#each schema['@graph'].filter(n => n["@type"] == "rdf:Property") as property}
-  {#if thing && thing[property["@id"]]}
-    <Selector thing={thing[property["@id"]]} property={property} />
+{#each schemaProperties as property}
+  {#if thing && thingProperties.includes(property)}
+    <Selector thing={doc.match(thing, property).toArray()[0].object} property={property} />
   {/if}
 {/each}
 

@@ -4,11 +4,9 @@ function wrapReturnValue(dataset, fn) {
   }
 }
 
-function getValue(dataset, fn) {
-  return function(subject, predicate) {
-    const ds = dataset.match(subject, predicate).toArray();
-    return ds.length && ds[0].object.value || undefined;
-  }
+function getValue(subject, predicate) {
+  const ds = this.match(subject, predicate).toArray();
+  return ds.length && ds[0].object.value || undefined;
 }
 
 export const wrap = dataset => {
@@ -27,7 +25,7 @@ export const wrap = dataset => {
     union: { value: wrapReturnValue(dataset, dataset.union) },
     // Additions
     test: { value: 'yes, still here' },
-    getValue: { value: getValue(dataset) },
+    getValue: { value: getValue },
   });
   return dataset;
 };

@@ -9,11 +9,9 @@
   export let thing;
 
   const doc = documents.getDocumentByPrefix('default');
-  const label = doc.match(thing, SCHEMA.name).toArray() || doc.match(thing, SCHEMA.headline).toArray() || doc.match(thing, SCHEMA.description).toArray();
-  const type = doc.match(thing, RDF.type).toArray()[0];
 </script>
 
 <mwc-list-item twoline=1>
-  <span>{label && label[0] && label[0].object.value}</span>
-  <span slot="secondary">{type && type.object.value}</span>
+  <span>{doc.getValue(thing, SCHEMA.name) || doc.getValue(thing, SCHEMA.headline) || doc.getValue(thing, SCHEMA.description)}</span>
+  <span slot="secondary">{doc.getValue(thing, RDF.type)}</span>
 </mwc-list-item>

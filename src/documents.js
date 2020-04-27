@@ -3,6 +3,7 @@ const Streamify = require("streamify-string");
 const ParserJsonld = require("@rdfjs/parser-jsonld");
 const parserJsonld = new ParserJsonld();
 import { RDFS, RDF, SCHEMA } from './namespaces';
+import { wrap } from './convenient-dataset';
 
 const parsers = new rdf.Parsers({
 // JSON-LD - application/ld+json - .jsonld
@@ -59,7 +60,7 @@ const getDocumentByPrefix = (prefix) => {
 }
 
 const load = async (prefix, mediaType, input, options) => {
-  byPrefix[prefix] = rdf.dataset().import(parsers.import(mediaType, input, options));
+  byPrefix[prefix] = wrap(rdf.dataset()).import(parsers.import(mediaType, input, options));
   byPrefix[prefix] = await byPrefix[prefix];
   // console.log(`Loaded ${prefix}`, byPrefix[prefix]);
 };

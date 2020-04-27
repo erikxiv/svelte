@@ -25,7 +25,7 @@
   const doc = documents.getDocumentByPrefix('default');
   doc.then(doc => {
     things = doc.match(null, RDF.type).toArray().map(q => q.subject);
-  })
+  });
 
   // localGraph.subscribe(value => {
   //   things = value["@graph"].filter(n => n["@id"] && !n["@id"].startsWith("_"));

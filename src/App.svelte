@@ -24,12 +24,8 @@
   let things = [];
   const doc = documents.getDocumentByPrefix('default');
   doc.then(doc => {
-    things = doc.match(null, RDF.type).toArray().map(q => q.subject);
+    things = doc.match(null, RDF.type).filter(q => q.subject.termType === 'NamedNode').toArray().map(q => q.subject);
   });
-
-  // localGraph.subscribe(value => {
-  //   things = value["@graph"].filter(n => n["@id"] && !n["@id"].startsWith("_"));
-  // });
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/service-worker.js');

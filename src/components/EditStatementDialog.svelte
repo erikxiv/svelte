@@ -21,16 +21,19 @@
   const schema = documents.getDocumentByPrefix('schema');
   const doc = documents.getDocumentByPrefix('default');
 
-  const allPredicates = [];
-  const allResources = [];
-  // const allPredicates = schema.getProperties().map(p => ({
-  //   text: p["@id"],
-  //   value: p["@id"],
-  // }));
-  // const allResources = schema.getResources().map(p => ({
-  //   text: p["@id"],
-  //   value: p["@id"],
-  // }));
+  const allPredicates = schema.getProperties().map(p => ({
+    text: p.value.replace(SCHEMA().value, 'schema:'),
+    value: p.value,
+  }));
+  const allResources = schema
+    .filter(q => q.subject.termType === 'NamedNode')
+    .toArray()
+    .map(q => q.subject.value)
+    .filter((value, index, self) => self.indexOf(value) === index)
+    .map(p => ({
+    text: p.replace(SCHEMA().value, 'schema:'),
+    value: p,
+  }));
 
   const submit = () => {
     // Some validation of input first
@@ -39,6 +42,7 @@
     }
 
     // TODO: Add statement
+    console.log(subject.text, predicate.text, object.text);
     return true;
   }
 

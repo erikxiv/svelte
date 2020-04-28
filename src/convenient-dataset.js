@@ -18,7 +18,10 @@ function getObject(subject, predicate) {
 
 // Returns an array of terms
 function getProperties(terms) {
-  if (Array.isArray(terms)) {
+  if (typeof(terms) === "undefined") {
+    return this.match(null, RDF.type, RDF.Property).toArray().map(q => q.subject);
+  }
+  else if (Array.isArray(terms)) {
     return terms.reduce((acc, curr) => {
       return [...acc, ...this.getProperties(curr)];
     }, []);

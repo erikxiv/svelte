@@ -11,7 +11,7 @@
 
   const schema = documents.getDocumentByPrefix('schema');
   const doc = documents.getDocumentByPrefix('default');
-  const type = doc.match(thing, RDF.type) && doc.match(thing, RDF.type)[0].object;
+  const type = doc.getObject(thing, RDF.type);
 
   // const arrayMe = n => Array.isArray(n) ? n : typeof(n) === 'undefined' ? [] : [n];
   const rangeIncludes = (p, t) => {
@@ -19,11 +19,11 @@
     return schema.match(p, SCHEMA.rangeIncludes, t).length > 0;
   }
   const formatDate = (d) => new Intl.DateTimeFormat('sv-SE').format(d);
-  const textMe = (n) => n.termType === "Literal" ? n.value : doc.match(n, SCHEMA.text) && doc.match(n, SCHEMA.text)[0].object.value;
+  const textMe = (n) => n.termType === "Literal" ? n.value : doc.getValue(n, SCHEMA.text);
 </script>
 
 {#if thing.termType === "Literal"}
-  <Property type={schema.match(property, RDFS.label)[0].value} value={thing.value} />
+  <Property type={schema.getValue(property, RDFS.label)} value={thing.value} />
 <!-- {:else if Array.isArray(thing)}
   <List type={schema.match(property, RDFS.label)[0].object.value}>
     {#each thing as item}

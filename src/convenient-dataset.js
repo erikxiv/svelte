@@ -1,3 +1,5 @@
+import { RDFS, RDF, SCHEMA } from './namespaces';
+
 function wrapReturnValue(dataset, fn) {
   return function() {
     return wrap(fn.apply(dataset, arguments));
@@ -7,6 +9,34 @@ function wrapReturnValue(dataset, fn) {
 function getValue(subject, predicate) {
   const ds = this.match(subject, predicate).toArray();
   return ds.length && ds[0].object.value || undefined;
+}
+
+function getObject(subject, predicate) {
+  const ds = this.match(subject, predicate).toArray();
+  return ds.length && ds[0].object || undefined;
+}
+
+// Returns an array of terms
+function getProperties(terms) {
+  if (Array.isArray(terms)) {
+    return terms.reduce((acc, curr) => {
+      return [...acc, ...this.getProperties(curr)];
+    }, []);
+  }
+  return this.match(null, SCHEMA.domainIncludes, terms).toArray().map(q => q.subject);
+}
+
+function follow(terms, predicate) {
+  if (! terms) {
+    return [];
+  }
+  if (Array.isArray(terms)) {
+    return terms.reduce((acc, curr) => {
+      return [...acc, ...this.follow(curr, predicate)];
+    }, []);
+  }
+  const next = this.match(terms, predicate).toArray().map(q => q.object);
+  return [terms, ...this.follow(next, predicate)];
 }
 
 export const wrap = dataset => {
@@ -27,6 +57,9 @@ export const wrap = dataset => {
       // Additions
       _convenient: { value: true },
       getValue: { value: getValue },
+      getObject: { value: getObject },
+      getProperties: { value: getProperties },
+      follow: { value: follow },
     });
   }
   return dataset;

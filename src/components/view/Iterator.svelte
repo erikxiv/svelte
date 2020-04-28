@@ -8,9 +8,10 @@
 
   const schema = documents.getDocumentByPrefix('schema');
   const doc = documents.getDocumentByPrefix('default');
-  const schemaProperties = schema.match(null, RDF.type, RDF.Property).toArray().map(q => q.subject);
+  const type = doc.getObject(thing, RDF.type);
+  const types = schema.follow(type, RDFS.subClassOf);
+  const schemaProperties = schema.getProperties(types);
   const thingProperties = doc.match(thing).toArray().map(q => q.predicate);
-  console.log(thingProperties);
 </script>
 
 {#each schemaProperties as property}

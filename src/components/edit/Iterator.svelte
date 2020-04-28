@@ -8,7 +8,9 @@
   // const properties = schema['@graph'].filter(n => n["@type"] == "rdf:Property");
   const schema = documents.getDocumentByPrefix('schema');
   const doc = documents.getDocumentByPrefix('default');
-  const schemaProperties = schema.match(null, RDF.type, RDF.Property).toArray().map(q => q.subject);
+  const type = doc.getObject(thing, RDF.type);
+  const types = schema.follow(type, RDFS.subClassOf);
+  const schemaProperties = schema.getProperties(types);
   const thingProperties = doc.match(thing).toArray().map(q => q.predicate);
   const add = (property) => () => {
     console.log("clicked", property);
@@ -41,7 +43,7 @@
 </style>
 
 {#each schemaProperties as property}
-  {#if thing && thingProperties.includes(property)}
+  {#if thing && thingProperties.some(p => p.equals(property))}
     <Selector thing={doc.match(thing, property).toArray()[0].object} property={property} />
   {:else}
     <div class="typed" title={schema.match(property, RDFS.comment).toArray()[0].object.value}>

@@ -24,10 +24,8 @@
   let things = [];
   const doc = documents.getDocumentByPrefix('default');
   const schema = documents.getDocumentByPrefix('schema');
-  console.log(doc);
   doc.then(doc => {
     things = doc.match(null, RDF.type).filter(q => q.subject.termType === 'NamedNode').toArray().map(q => q.subject);
-    console.log(doc);
   });
 
   if ('serviceWorker' in navigator) {

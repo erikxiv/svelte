@@ -22,16 +22,6 @@ const getAllClasses = (dataset, terms) => {
 }
 
 // Returns an array of terms
-const getProperties = (dataset, terms) => {
-  if (Array.isArray(terms)) {
-    return terms.reduce((acc, curr) => {
-      return [...acc, ...getProperties(curr)];
-    }, []);
-  }
-  return dataset.match(null, SCHEMA.domainIncludes, terms).toArray().map(q => q.subject);
-}
-
-// Returns an array of terms
 const getResources = (dataset) => {
   return dataset.toArray().reduce((acc, curr) => {
     if (curr.subject.termType === "NamedNode" && !acc.includes(curr.subject)) {
@@ -48,7 +38,6 @@ const getDocumentByPrefix = (prefix) => {
 const load = async (prefix, mediaType, input, options) => {
   byPrefix[prefix] = wrap(rdf.dataset()).import(formats.parsers.import(mediaType, input, options));
   byPrefix[prefix] = await byPrefix[prefix];
-  console.log(`Loaded ${prefix}`, byPrefix[prefix]);
 };
 
 const save = async (prefix) => {
@@ -60,7 +49,6 @@ const save = async (prefix) => {
 
 export default {
   getAllClasses,
-  getProperties,
   getResources,
 
   getDocumentByPrefix,

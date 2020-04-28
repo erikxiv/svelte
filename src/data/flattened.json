@@ -58,6 +58,11 @@
   },
   "@graph": [
     {
+      "@id": "default:t",
+      "@type": "schema:Thing",
+      "schema:name": "This is a thing"
+    },
+    {
       "@id": "default:b",
       "@type": "schema:Recipe",
       "schema:aggregateRating": {

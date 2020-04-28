@@ -1,23 +1,9 @@
 const rdf = require("rdf-ext");
 const Streamify = require("streamify-string");
-const ParserJsonld = require("@rdfjs/parser-jsonld");
-const parserJsonld = new ParserJsonld();
+const toString = require('stream-to-string')
+const formats = require('@rdfjs/formats-common')
 import { RDFS, RDF, SCHEMA } from './namespaces';
 import { wrap } from './convenient-dataset';
-
-const parsers = new rdf.Parsers({
-// JSON-LD - application/ld+json - .jsonld
-// RDF/XML - application/rdf+xml - .rdf
-// Triples - text/plain - .nt
-// Turtle - application/x-turtle - .ttl
-// CSV - text/csv - .csv
-  'application/ld+json': parserJsonld,
-});
-
-// import jsonLdSchema from './schemas/schema.json';
-// const schema = rdf.dataset().import(parserJsonld.import(Streamify(JSON.stringify(jsonLdSchema))));
-// load('application/ld+json', jsonLdSchema);
-// console.log('hello');
 
 const byPrefix = {}
 
@@ -60,10 +46,17 @@ const getDocumentByPrefix = (prefix) => {
 }
 
 const load = async (prefix, mediaType, input, options) => {
-  byPrefix[prefix] = wrap(rdf.dataset()).import(parsers.import(mediaType, input, options));
+  byPrefix[prefix] = wrap(rdf.dataset()).import(formats.parsers.import(mediaType, input, options));
   byPrefix[prefix] = await byPrefix[prefix];
-  // console.log(`Loaded ${prefix}`, byPrefix[prefix]);
+  console.log(`Loaded ${prefix}`, byPrefix[prefix]);
 };
+
+const save = async (prefix) => {
+  const doc = byPrefix[prefix];
+  const serializer = formats.serializers.get('application/ld+json');
+  const stream = serializer.import(doc.toStream());
+  toString(stream).then(txt => localStorage.setItem(prefix, txt));
+}
 
 export default {
   getAllClasses,
@@ -72,4 +65,5 @@ export default {
 
   getDocumentByPrefix,
   load,
+  save,
 }

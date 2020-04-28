@@ -22,4 +22,4 @@
   };
 </script>
 
-<Property type={schema.match(property, RDFS.label)[0].object.value} value={humanReadableDuration(thing)} />
+<Property type={schema.getValue(property, RDFS.label)} value={humanReadableDuration(thing.value)} />

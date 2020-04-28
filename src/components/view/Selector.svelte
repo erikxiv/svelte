@@ -12,7 +12,7 @@
 
   const schema = documents.getDocumentByPrefix('schema');
   const doc = documents.getDocumentByPrefix('default');
-  const type = doc.match(thing, RDF.type) && doc.match(thing, RDF.type)[0].object;
+  const type = doc.match(thing, RDF.type).toArray().length > 0 && doc.match(thing, RDF.type).toArray()[0].object;
 
   // const arrayMe = n => Array.isArray(n) ? n : typeof(n) === 'undefined' ? [] : [n];
   const rangeIncludes = (p, t) => {
@@ -20,14 +20,14 @@
     return schema.match(p, SCHEMA.rangeIncludes, t).length > 0;
   }
   const formatDate = (d) => new Intl.DateTimeFormat('sv-SE').format(d);
-  const textMe = (n) => n.termType === "Literal" ? n.value : doc.match(n, SCHEMA.text) && doc.match(n, SCHEMA.text)[0].object.value;
+  const textMe = (n) => n.termType === "Literal" ? n.value : doc.match(n, SCHEMA.text).toArray().length > 0 && doc.match(n, SCHEMA.text).toArray()[0].object.value;
 </script>
 
 {#if thing.termType === "Literal"}
   {#if rangeIncludes(property, SCHEMA.Duration)}
     <Duration {thing} {property} />
   {:else}
-    <Property type={schema.match(property, RDFS.label)[0].value} value={thing.value} />
+    <Property type={schema.getValue(property, RDFS.label)} value={thing.value} />
   {/if}
 <!-- {:else if Array.isArray(thing)}
   <List type={property["rdfs:label"]}>

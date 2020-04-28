@@ -1,5 +1,4 @@
 <script>
-  import schema from '../schema';
   import Iterator from './edit/Iterator.svelte';
 
   export let thing;

@@ -6,7 +6,6 @@
   import cf from 'clownface';
   import namespace from '@rdfjs/namespace';
   import Serializer from '@rdfjs/serializer-jsonld-ext';
-  import s from '../schema';
   const { Readable } = require('stream');
   const DC = namespace("http://purl.org/dc/elements/1.1/");
   const DCTERMS = namespace("http://purl.org/dc/terms/");

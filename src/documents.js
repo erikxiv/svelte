@@ -7,30 +7,6 @@ import { wrap } from './convenient-dataset';
 
 const byPrefix = {}
 
-// Returns an array of terms
-const getAllClasses = (dataset, terms) => {
-  if (! terms) {
-    return [];
-  }
-  if (Array.isArray(terms)) {
-    return terms.reduce((acc, curr) => {
-      return [...acc, ...getAllClasses(curr)];
-    }, []);
-  }
-  const next = dataset.match(terms, RDFS.subClassOf).toArray().map(q => q.object);
-  return [terms, ...getAllClasses(dataset, next)];
-}
-
-// Returns an array of terms
-const getResources = (dataset) => {
-  return dataset.toArray().reduce((acc, curr) => {
-    if (curr.subject.termType === "NamedNode" && !acc.includes(curr.subject)) {
-      acc.push(curr.subject);
-    }
-    return acc;
-  }, []);
-}
-
 const getDocumentByPrefix = (prefix) => {
   return byPrefix[prefix];
 }
@@ -48,9 +24,6 @@ const save = async (prefix) => {
 }
 
 export default {
-  getAllClasses,
-  getResources,
-
   getDocumentByPrefix,
   load,
   save,

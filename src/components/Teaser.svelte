@@ -3,12 +3,12 @@
   import '@material/mwc-list/mwc-list-item.js';
   import '@material/mwc-icon';
   import '@material/mwc-icon-button';
-  import documents from '../documents';
+  import environment from '../environment';
   import { RDF, RDFS, SCHEMA } from '../namespaces';
 
   export let thing;
 
-  const doc = documents.getDocumentByPrefix('default');
+  const doc = environment.getDocument('default');
 </script>
 
 <mwc-list-item twoline=1>

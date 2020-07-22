@@ -1,14 +1,14 @@
 <script>
   import Property from './Property.svelte';
   import { parse } from 'tinyduration';
-  import documents from '../../documents';
+  import environment from '../../environment';
   import { RDF, RDFS, SCHEMA } from '../../namespaces';
 
   export let thing;
   export let property;
 
-  const schema = documents.getDocumentByPrefix('schema');
-  const doc = documents.getDocumentByPrefix('default');
+  const schema = environment.getDocument('schema');
+  const doc = environment.getDocument('default');
 
   const humanReadableDuration = (iso8601) => {
     const { years, months, weeks, days, hours, minutes, seconds } = parse(iso8601);

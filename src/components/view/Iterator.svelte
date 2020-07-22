@@ -1,13 +1,13 @@
 <script>
   // import { getProperties, schema } from '../../schema';
   import Selector from './Selector.svelte';
-  import documents from '../../documents';
+  import environment from '../../environment';
   import { RDF, RDFS } from '../../namespaces';
 
   export let thing;
 
-  const schema = documents.getDocumentByPrefix('schema');
-  const doc = documents.getDocumentByPrefix('default');
+  const schema = environment.getDocument('schema');
+  const doc = environment.getDocument('default');
   const type = doc.getObject(thing, RDF.type);
   const types = schema.follow(type, RDFS.subClassOf);
   const schemaProperties = schema.getProperties(types);

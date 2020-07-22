@@ -14,16 +14,15 @@
   import Playground from './components/Playground.svelte';
   import Teaser from './components/Teaser.svelte';
   import View from './components/View.svelte';
-  import { current, load } from './documents.js';
   import { flattened } from './data';
-  import documents from './documents';
+  import environment from './environment';
   import { RDF } from './namespaces';
 
   export let version;
 
   let things = [];
-  const doc = documents.getDocumentByPrefix('default');
-  const schema = documents.getDocumentByPrefix('schema');
+  const doc = environment.getDocument('default');
+  const schema = environment.getDocument('schema');
   doc.then(doc => {
     things = doc.match(null, RDF.type).filter(q => q.subject.termType === 'NamedNode').toArray().map(q => q.subject);
   });
@@ -37,9 +36,9 @@
   const loadExampleData = () => {
     doc.then(doc => {
       doc.deleteMatches();
-      doc.addAll(documents.getDocumentByPrefix('example'));
+      doc.addAll(environment.getDocument('example'));
       things = doc.match(null, RDF.type).filter(q => q.subject.termType === 'NamedNode').toArray().map(q => q.subject);
-      documents.save('default');
+      environment.save('default');
     });
   }
 </script>

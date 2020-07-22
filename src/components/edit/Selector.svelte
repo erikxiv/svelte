@@ -4,13 +4,13 @@
   import Image from './Image.svelte';
   import List from './List.svelte';
   import Card from './Card.svelte';
-  import documents from '../../documents';
+  import environment from '../../environment';
   import { RDF, RDFS, SCHEMA } from '../../namespaces';
 
   export let property, thing;
 
-  const schema = documents.getDocumentByPrefix('schema');
-  const doc = documents.getDocumentByPrefix('default');
+  const schema = environment.getDocument('schema');
+  const doc = environment.getDocument('default');
   const type = doc.getObject(thing, RDF.type);
 
   // const arrayMe = n => Array.isArray(n) ? n : typeof(n) === 'undefined' ? [] : [n];

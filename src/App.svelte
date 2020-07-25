@@ -17,6 +17,7 @@
   import { flattened } from './data';
   import environment from './environment';
   import { RDF } from './namespaces';
+  const auth = require('solid-auth-client')
 
   export let version;
 
@@ -41,70 +42,88 @@
       environment.save('default');
     });
   }
+
+  auth.trackSession(session => {
+    if (!session) {
+      console.log('The user is not logged in, redirecting to solid.community')
+      auth.login('https://solid.community', {
+        clientName: 'Evergraph',
+        logoUri: 'https://evergraph.me/favicon.svg',
+        contacts: ['erikxiv@gmail.com']
+      });
+    }
+    else {
+      console.log(`The user is ${session.webId}`)
+    }
+  })
 </script>
 
 <style>
-mwc-top-app-bar {
-  --mdc-theme-primary: white;
-  --mdc-theme-on-primary: black;
-}
+  mwc-top-app-bar {
+    --mdc-theme-primary: white;
+    --mdc-theme-on-primary: black;
+  }
 </style>
 
 <mwc-drawer id="drawer" type="modal">
-    <mwc-list on:click={closeDrawer}>
-      <Link href="/">
-        <mwc-list-item graphic="avatar" twoline=1>
-          <span>Evergraph</span>
-          <span slot="secondary">{version}</span>
-          <img src="/favicon.svg" alt="logotype" slot="graphic" />
-        </mwc-list-item>
-      </Link>
-      <li divider role="separator"></li>
-      <mwc-list-item graphic="icon">
-        <slot>FAQ</slot>
-        <mwc-icon slot="graphic">help_outline</mwc-icon>
-      </mwc-list-item>
-      <mwc-list-item graphic="icon" on:click={loadExampleData}>
-        <slot>Load example data</slot>
-        <mwc-icon slot="graphic">system_update</mwc-icon>
-      </mwc-list-item>
-      <mwc-list-item graphic="icon" on:click={() => window.location.reload()}>
-        <slot>Sign out</slot>
-        <mwc-icon slot="graphic">exit_to_app</mwc-icon>
-      </mwc-list-item>
-    </mwc-list>
+  <mwc-list on:click={closeDrawer}>
+    <Link href="/">
+    <mwc-list-item graphic="avatar" twoline=1>
+      <span>Evergraph</span>
+      <span slot="secondary">{version}</span>
+      <img src="/favicon.svg" alt="logotype" slot="graphic" />
+    </mwc-list-item>
+  </Link>
+  <li divider role="separator"></li>
+  <mwc-list-item graphic="icon">
+    <slot>FAQ</slot>
+    <mwc-icon slot="graphic">help_outline</mwc-icon>
+  </mwc-list-item>
+  <mwc-list-item graphic="icon" on:click={loadExampleData}>
+    <slot>Load example data</slot>
+    <mwc-icon slot="graphic">system_update</mwc-icon>
+  </mwc-list-item>
+  <mwc-list-item graphic="icon" on:click={() => window.location.reload()}>
+    <slot>Reload</slot>
+    <mwc-icon slot="graphic">cached</mwc-icon>
+  </mwc-list-item>
+  <mwc-list-item graphic="icon" on:click={() => auth.logout()}>
+    <slot>Sign out</slot>
+    <mwc-icon slot="graphic">exit_to_app</mwc-icon>
+  </mwc-list-item>
+</mwc-list>
 
-  <div slot="appContent">
-    <mwc-top-app-bar>
-      <mwc-icon-button icon="menu" slot="navigationIcon" on:click={openDrawer}></mwc-icon-button>
-      <!-- Title -->
-      <div slot="title">{$router.path}</div>
-      <!-- Content -->
-    </mwc-top-app-bar>
-      <div>
-        {#await Promise.all([doc, schema])}
-          <p>...waiting</p>
-        {:then notused}
-          <Router>
-            <Route exact>
-              <List {things} />
-            </Route>
-            <Route exact path="/edit/:id" let:router>
-              <Edit thing={things[router.params.id]} />
-            </Route>
-            <Route exact path="/view/:id" let:router>
-              <View thing={things[router.params.id]} />
-            </Route>
-            <Route exact path="/playground">
-              <Playground />
-            </Route>
-            <Route fallback>
-              <Missing />
-            </Route>
-          </Router>
-        {:catch error}
-          <p style="color: red">{error.message}</p>
-        {/await}
-      </div>
+<div slot="appContent">
+  <mwc-top-app-bar>
+    <mwc-icon-button icon="menu" slot="navigationIcon" on:click={openDrawer}></mwc-icon-button>
+    <!-- Title -->
+    <div slot="title">{$router.path}</div>
+    <!-- Content -->
+  </mwc-top-app-bar>
+  <div>
+    {#await Promise.all([doc, schema])}
+    <p>...waiting</p>
+    {:then notused}
+    <Router>
+      <Route exact>
+        <List {things} />
+      </Route>
+      <Route exact path="/edit/:id" let:router>
+        <Edit thing={things[router.params.id]} />
+      </Route>
+      <Route exact path="/view/:id" let:router>
+        <View thing={things[router.params.id]} />
+      </Route>
+      <Route exact path="/playground">
+        <Playground />
+      </Route>
+      <Route fallback>
+        <Missing />
+      </Route>
+    </Router>
+    {:catch error}
+    <p style="color: red">{error.message}</p>
+    {/await}
   </div>
+</div>
 </mwc-drawer>

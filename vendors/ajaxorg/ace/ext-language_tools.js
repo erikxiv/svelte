@@ -2111,7 +2111,6 @@ require("../config").defineOptions(Editor.prototype, "editor", {
     },
     enableLiveAutocompletion: {
         set: function(val) {
-          console.log('ext live set', val);
             if (val) {
                 if (!this.completers)
                     this.completers = Array.isArray(val)? val: completers;

@@ -8,6 +8,7 @@
   import '@material/mwc-menu';
   import '@material/mwc-top-app-bar';
   import { Router, Route, Link, router } from 'yrv';
+  import Ace from './components/Ace.svelte';
   import Edit from './components/Edit.svelte';
   import List from './components/List.svelte';
   import Missing from './components/Missing.svelte';
@@ -107,6 +108,9 @@
     <Router>
       <Route exact>
         <List {things} />
+      </Route>
+      <Route exact path="/ace" let:router>
+        <Ace />
       </Route>
       <Route exact path="/edit/:id" let:router>
         <Edit thing={things[router.params.id]} />

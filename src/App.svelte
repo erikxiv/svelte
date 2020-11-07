@@ -45,8 +45,8 @@
 
   auth.trackSession(session => {
     if (!session) {
-      console.log('The user is not logged in, redirecting to solid.community')
-      auth.login('https://solid.community', {
+      console.log('The user is not logged in, redirecting to solidcommunity.net')
+      auth.login('https://solidcommunity.net', {
         clientName: 'Evergraph',
         logoUri: 'https://evergraph.me/favicon.svg',
         contacts: ['erikxiv@gmail.com']

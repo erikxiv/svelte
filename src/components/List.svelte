@@ -68,6 +68,7 @@
   <div slot="appContent">
     <mwc-top-app-bar>
       <mwc-icon-button icon="menu" slot="navigationIcon" on:click={openDrawer}></mwc-icon-button>
+      <mwc-textfield slot="title" placeholder="Search"></mwc-textfield>
       <!-- Content -->
       <mwc-fab icon="add" on:click={openDialog}></mwc-fab>
       <mwc-list>

@@ -9,10 +9,13 @@
   .mdc-layout-grid {
     padding-top: 0px;
   }
+  mwc-icon-button.save {
+    color: green;
+  }
 </style>
 
 <mwc-top-app-bar>
-  <mwc-icon-button icon="check" slot="navigationIcon" on:click={() => navigateTo(window.location.pathname.replace("edit", "view"))}></mwc-icon-button>
+  <mwc-icon-button icon="check" slot="navigationIcon" class="save" on:click={() => navigateTo(window.location.pathname.replace("edit", "view"))}></mwc-icon-button>
   <mwc-icon-button icon="more_horiz" slot="actionItems"></mwc-icon-button>
   <!-- Content -->
   <div class="mdc-layout-grid mdc-typography">

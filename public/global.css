@@ -67,3 +67,16 @@ code:before,
 code:after {
   content: '\`';
 }
+
+/** Evergraph globals **/
+mwc-top-app-bar {
+  --mdc-theme-primary: white;
+  --mdc-theme-on-primary: black;
+}
+mwc-fab {
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  --mdc-theme-secondary: white;
+  --mdc-theme-on-secondary: black;
+}

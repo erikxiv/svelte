@@ -34,7 +34,7 @@
     "rdf-ext": "^1.3.0",
     "rdflib": "^1.1.0",
     "sirv-cli": "^0.4.4",
-    "solid-auth-client": "^2.4.1",
+    "solid-auth-client": "^2.5.3",
     "stream-to-string": "^1.2.0",
     "streamify-string": "^1.0.1",
     "tinyduration": "^3.1.1",

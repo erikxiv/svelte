@@ -7,6 +7,9 @@
     "test-watch": "jest --watchAll",
     "dev": "webpack-dev-server --content-base public"
   },
+  "engines": {
+    "node": "14.x"
+  },
   "dependencies": {
     "@material/mwc-button": "^0.14.1",
     "@material/mwc-dialog": "^0.14.1",

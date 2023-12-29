@@ -1,23 +1,50 @@
 <script>
-  import '@material/mwc-icon';
-  import Selector from './Selector.svelte';
-  import environment from '../../environment';
-  import { RDF, RDFS } from '../../namespaces';
+  import Selector from "./Selector.svelte";
+  import environment from "../../environment";
+  import { RDF, RDFS } from "../../namespaces";
 
   export let thing;
   // const properties = schema['@graph'].filter(n => n["@type"] == "rdf:Property");
-  const schema = environment.getDocument('schema');
-  const doc = environment.getDocument('default');
+  const schema = environment.getDocument("schema");
+  const doc = environment.getDocument("default");
   const type = doc.getObject(thing, RDF.type);
   const types = schema.follow(type, RDFS.subClassOf);
   const schemaProperties = schema.getProperties(types);
-  const thingProperties = doc.match(thing).toArray().map(q => q.predicate);
+  const thingProperties = doc
+    .match(thing)
+    .toArray()
+    .map((q) => q.predicate);
   const add = (property) => () => {
     console.log("clicked", property);
     // thing[property["@id"]] = "";
     // thing = thing;
   };
 </script>
+
+{#each schemaProperties as property}
+  {#if thing && thingProperties.some((p) => p.equals(property))}
+    <Selector
+      thing={doc.match(thing, property).toArray()[0].object}
+      {property}
+    />
+  {:else}
+    <div
+      class="typed"
+      title={schema.match(property, RDFS.comment).toArray()[0].object.value}
+    >
+      <span class="type mdc-typography--overline"
+        >{schema.match(property, RDFS.label).toArray()[0].object.value}</span
+      >
+      <span
+        class="button"
+        on:click|once={add(property)}
+        on:keypress|once={add(property)}
+        role="button"
+        tabindex="0"><md-icon>add_box</md-icon></span
+      >
+    </div>
+  {/if}
+{/each}
 
 <style>
   .typed {
@@ -41,15 +68,3 @@
     cursor: pointer;
   }
 </style>
-
-{#each schemaProperties as property}
-  {#if thing && thingProperties.some(p => p.equals(property))}
-    <Selector thing={doc.match(thing, property).toArray()[0].object} property={property} />
-  {:else}
-    <div class="typed" title={schema.match(property, RDFS.comment).toArray()[0].object.value}>
-      <span class="type mdc-typography--overline">{schema.match(property, RDFS.label).toArray()[0].object.value}</span>
-      <span class="button" on:click|once={add(property)}><mwc-icon>add_box</mwc-icon></span>
-    </div>
-  {/if}
-{/each}
-

@@ -1,17 +1,21 @@
 <script>
-  import '@material/mwc-list/mwc-list.js';
-  import '@material/mwc-list/mwc-list-item.js';
-  import '@material/mwc-icon';
-  import { Link, navigateTo } from 'yrv';
+  import { navigate } from "svelte-routing";
 </script>
 
-<mwc-top-app-bar>
-  <mwc-icon-button icon="arrow_back_ios" slot="navigationIcon" on:click={() => navigateTo('/')}></mwc-icon-button>
+<md-top-app-bar>
+  <md-icon-button
+    icon="arrow_back_ios"
+    slot="navigationIcon"
+    role="button"
+    tabindex="0"
+    on:click={() => navigate("/")}
+    on:keypress={() => navigate("/")}
+  ></md-icon-button>
   <!-- Content -->
-  <mwc-list>
-    <mwc-list-item graphic="icon">
+  <md-list>
+    <md-list-item graphic="icon">
       <span><strong>Search</strong> | is not implemented yet</span>
-      <span slot="graphic"><mwc-icon>visibility_off</mwc-icon></span>
-    </mwc-list-item>
-  </mwc-list>
-</mwc-top-app-bar>
+      <span slot="graphic"><md-icon>visibility_off</md-icon></span>
+    </md-list-item>
+  </md-list>
+</md-top-app-bar>

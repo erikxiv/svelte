@@ -1,23 +1,23 @@
 <script>
-  import Iterator from './view/Iterator.svelte';
-  import { Link, navigateTo } from 'yrv';
-  import '@material/mwc-fab';
+  import Iterator from "./view/Iterator.svelte";
+  import { Link, navigate } from "svelte-routing";
 
   export let thing;
 </script>
 
-<style>
-  .mdc-layout-grid {
-    padding-top: 0px;
-  }
-</style>
-
-<mwc-top-app-bar>
-  <mwc-icon-button icon="arrow_back_ios" slot="navigationIcon" on:click={() => navigateTo('/')}></mwc-icon-button>
-  <mwc-icon-button icon="more_horiz" slot="actionItems"></mwc-icon-button>
+<md-top-app-bar>
+  <md-icon-button
+    icon="arrow_back_ios"
+    slot="navigationIcon"
+    role="button"
+    tabindex="0"
+    on:click={() => navigate("/")}
+    on:keypress={() => navigate("/")}
+  ></md-icon-button>
+  <md-icon-button icon="more_horiz" slot="actionItems"></md-icon-button>
   <!-- Content -->
   <Link href={window.location.pathname.replace("view", "edit")}>
-    <mwc-fab icon="edit"></mwc-fab>
+    <md-fab icon="edit"></md-fab>
   </Link>
   <div class="mdc-layout-grid mdc-typography">
     <div class="mdc-layout-grid__inner">
@@ -26,4 +26,10 @@
       </div>
     </div>
   </div>
-</mwc-top-app-bar>
+</md-top-app-bar>
+
+<style>
+  .mdc-layout-grid {
+    padding-top: 0px;
+  }
+</style>

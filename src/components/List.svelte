@@ -2,82 +2,109 @@
   export let things;
   export let version;
 
-  import '@material/mwc-button';
-  import '@material/mwc-dialog';
-  import '@material/mwc-drawer';
-  import '@material/mwc-fab';
-  import '@material/mwc-formfield';
-  import '@material/mwc-icon';
-  import '@material/mwc-icon-button';
-  import '@material/mwc-list/mwc-list-item.js';
-  import '@material/mwc-list/mwc-list.js';
-  import '@material/mwc-menu';
-  import '@material/mwc-radio';
-  import '@material/mwc-textfield';
-  import '@material/mwc-top-app-bar';
-  import 'paper-autocomplete/paper-autocomplete.js';
-  import { Link } from 'yrv';
-  import Teaser from './Teaser.svelte';
-  import { dialogIsOpen } from '../stores.js';
-  const auth = require('solid-auth-client')
+  import "paper-autocomplete/paper-autocomplete.js";
+  import { Link } from "svelte-routing";
+  import Teaser from "./Teaser.svelte";
+  import { dialogIsOpen } from "../stores.js";
+  const auth = require("solid-auth-client");
 
   const openDialog = () => dialogIsOpen.update(() => true);
-  const openDrawer = () => drawer.open = true;
-  const closeDrawer = () => drawer.open = false;
+  const openDrawer = () => (drawer.open = true);
+  const closeDrawer = () => (drawer.open = false);
   const loadExampleData = () => {
-    doc.then(doc => {
+    doc.then((doc) => {
       doc.deleteMatches();
-      doc.addAll(environment.getDocument('example'));
-      things = doc.match(null, RDF.type).filter(q => q.subject.termType === 'NamedNode').toArray().map(q => q.subject);
-      environment.save('default');
+      doc.addAll(environment.getDocument("example"));
+      things = doc
+        .match(null, RDF.type)
+        .filter((q) => q.subject.termType === "NamedNode")
+        .toArray()
+        .map((q) => q.subject);
+      environment.save("default");
     });
-  }
+  };
 </script>
 
-<style>
-</style>
-
-<mwc-drawer id="drawer" type="modal">
-  <mwc-list on:click={closeDrawer}>
+<md-drawer id="drawer" type="modal">
+  <md-list
+    on:click={closeDrawer}
+    on:keypress={closeDrawer}
+    role="button"
+    tabindex="0"
+  >
     <Link href="/">
-    <mwc-list-item graphic="avatar" twoline=1>
-      <span>Evergraph</span>
-      <span slot="secondary">{version}</span>
-      <img src="/favicon.svg" alt="logotype" slot="graphic" />
-    </mwc-list-item>
+      <md-list-item graphic="avatar" twoline="1">
+        <span>Evergraph</span>
+        <span slot="secondary">{version}</span>
+        <img src="/favicon.svg" alt="logotype" slot="graphic" />
+      </md-list-item>
     </Link>
     <li divider role="separator"></li>
-    <mwc-list-item graphic="icon">
+    <md-list-item graphic="icon">
       <slot>FAQ</slot>
-      <mwc-icon slot="graphic">help_outline</mwc-icon>
-    </mwc-list-item>
-    <mwc-list-item graphic="icon" on:click={loadExampleData}>
+      <md-icon slot="graphic">help_outline</md-icon>
+    </md-list-item>
+    <md-list-item
+      graphic="icon"
+      role="button"
+      tabindex="0"
+      on:click={loadExampleData}
+      on:keypress={loadExampleData}
+    >
       <slot>Load example data</slot>
-      <mwc-icon slot="graphic">system_update</mwc-icon>
-    </mwc-list-item>
-    <mwc-list-item graphic="icon" on:click={() => window.location.reload()}>
+      <md-icon slot="graphic">system_update</md-icon>
+    </md-list-item>
+    <md-list-item
+      graphic="icon"
+      role="button"
+      tabindex="0"
+      on:keypress={() => window.location.reload()}
+      on:click={() => window.location.reload()}
+    >
       <slot>Reload</slot>
-      <mwc-icon slot="graphic">cached</mwc-icon>
-    </mwc-list-item>
-    <mwc-list-item graphic="icon" on:click={() => auth.logout()}>
+      <md-icon slot="graphic">cached</md-icon>
+    </md-list-item>
+    <md-list-item
+      graphic="icon"
+      role="button"
+      tabindex="0"
+      on:click={() => auth.logout()}
+      on:keypress={() => auth.logout()}
+    >
       <slot>Sign out</slot>
-      <mwc-icon slot="graphic">exit_to_app</mwc-icon>
-    </mwc-list-item>
-  </mwc-list>
+      <md-icon slot="graphic">exit_to_app</md-icon>
+    </md-list-item>
+  </md-list>
 
   <div slot="appContent">
-    <mwc-top-app-bar>
-      <mwc-icon-button icon="menu" slot="navigationIcon" on:click={openDrawer}></mwc-icon-button>
-      <mwc-textfield slot="title" placeholder="Search"></mwc-textfield>
+    <md-top-app-bar>
+      <md-icon-button
+        icon="menu"
+        slot="navigationIcon"
+        role="button"
+        tabindex="0"
+        on:click={openDrawer}
+        on:keypress={openDrawer}
+      ></md-icon-button>
+      <md-textfield slot="title" placeholder="Search"></md-textfield>
       <!-- Content -->
-      <mwc-fab icon="add" on:click={openDialog}></mwc-fab>
-      <mwc-list>
+      <md-fab
+        icon="add"
+        role="button"
+        tabindex="0"
+        on:click={openDialog}
+        on:keypress={openDialog}
+      ></md-fab>
+      <md-list>
         {#each things as thing, i}
           <Link href="/view/{i}">
             <Teaser {thing} />
           </Link>
         {/each}
-      </mwc-list>
-    </mwc-top-app-bar>
+      </md-list>
+    </md-top-app-bar>
   </div>
-</mwc-drawer>
+</md-drawer>
+
+<style>
+</style>

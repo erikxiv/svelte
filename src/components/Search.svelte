@@ -1,8 +1,9 @@
 <script>
   import { navigate } from "svelte-routing";
+  import "@material/mwc-top-app-bar";
 </script>
 
-<md-top-app-bar>
+<mwc-top-app-bar>
   <md-icon-button
     icon="arrow_back_ios"
     slot="navigationIcon"
@@ -18,4 +19,4 @@
       <span slot="graphic"><md-icon>visibility_off</md-icon></span>
     </md-list-item>
   </md-list>
-</md-top-app-bar>
+</mwc-top-app-bar>

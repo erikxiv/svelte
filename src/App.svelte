@@ -21,11 +21,13 @@
   const doc = environment.getDocument("default");
   const schema = environment.getDocument("schema");
   doc.then((doc) => {
+    console.log("🤷‍♂️", doc);
     things = doc
       .match(null, RDF.type)
       .filter((q) => q.subject.termType === "NamedNode")
       .toArray()
       .map((q) => q.subject);
+    console.log("🕵️‍♂️", things);
   });
 
   if ("serviceWorker" in navigator) {
@@ -48,19 +50,19 @@
       <p>...waiting</p>
     {:then notused}
       <Router {url}>
-        <Route redirect={loggedInStatus ? undefined : "/start"}>
+        <Route path="/">
           <List {things} {version} />
         </Route>
-        <Route path="/start" let:router>
+        <Route path="/start">
           <Start />
         </Route>
-        <Route path="/edit/:id" let:router>
-          <Edit thing={things[router.params.id]} />
+        <Route path="/edit/:id" let:params>
+          <Edit thing={things[params.id]} />
         </Route>
-        <Route path="/view/:id" let:router>
-          <View thing={things[router.params.id]} />
+        <Route path="/view/:id" let:params>
+          <View thing={things[params.id]} />
         </Route>
-        <Route path="/search" let:router>
+        <Route path="/search">
           <Search />
         </Route>
         <Route path="/playground">

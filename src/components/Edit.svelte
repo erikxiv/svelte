@@ -1,13 +1,13 @@
 <script>
+  import "@material/mwc-top-app-bar";
   import Iterator from "./edit/Iterator.svelte";
   import { Router, Link, navigate } from "svelte-routing";
 
   export let thing;
 </script>
 
-<md-top-app-bar>
+<mwc-top-app-bar>
   <md-icon-button
-    icon="check"
     slot="navigationIcon"
     class="save"
     role="button"
@@ -15,22 +15,25 @@
     on:keypress={() =>
       navigate(window.location.pathname.replace("edit", "view"))}
     on:click={() => navigate(window.location.pathname.replace("edit", "view"))}
-  ></md-icon-button>
-  <md-icon-button icon="more_horiz" slot="actionItems"></md-icon-button>
+  >
+    <md-icon>check</md-icon>
+  </md-icon-button>
+  <md-icon-button slot="actionItems">
+    <md-icon>more_horiz</md-icon>
+  </md-icon-button>
   <!-- Content -->
   <div class="mdc-layout-grid mdc-typography">
     <div class="mdc-layout-grid__inner">
       <div class="mdc-layout-grid__cell">
         <p>
-          <Link href={window.location.pathname.replace("edit", "view")}
-            >View</Link
+          <Link to={window.location.pathname.replace("edit", "view")}>View</Link
           >
         </p>
         <Iterator {thing} />
       </div>
     </div>
   </div>
-</md-top-app-bar>
+</mwc-top-app-bar>
 
 <style>
   .mdc-layout-grid {

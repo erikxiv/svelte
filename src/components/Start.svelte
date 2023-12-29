@@ -1,4 +1,7 @@
 <script>
+  import "@material/web/list/list.js";
+  import "@material/web/list/list-item.js";
+
   const auth = require("solid-auth-client");
   function login() {
     auth.login("https://solidcommunity.net", {

@@ -88,7 +88,7 @@ code:after {
 }
 
 /** Evergraph globals **/
-md-top-app-bar {
+mwc-top-app-bar {
   --mdc-theme-primary: white;
   --mdc-theme-on-primary: black;
 }

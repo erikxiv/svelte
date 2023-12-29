@@ -2,6 +2,14 @@
   export let things;
   export let version;
 
+  import "@material/mwc-drawer";
+  import "@material/mwc-top-app-bar";
+  import "@material/web/fab/fab.js";
+  import "@material/web/divider/divider.js";
+  import "@material/web/icon/icon.js";
+  import "@material/web/iconbutton/icon-button.js";
+  import "@material/web/list/list.js";
+  import "@material/web/list/list-item.js";
   import "paper-autocomplete/paper-autocomplete.js";
   import { Link } from "svelte-routing";
   import Teaser from "./Teaser.svelte";
@@ -25,86 +33,97 @@
   };
 </script>
 
-<md-drawer id="drawer" type="modal">
+<mwc-drawer id="drawer" type="modal">
   <md-list
     on:click={closeDrawer}
     on:keypress={closeDrawer}
     role="button"
     tabindex="0"
   >
-    <Link href="/">
-      <md-list-item graphic="avatar" twoline="1">
-        <span>Evergraph</span>
-        <span slot="secondary">{version}</span>
-        <img src="/favicon.svg" alt="logotype" slot="graphic" />
+    <Link to="/">
+      <md-list-item>
+        <span slot="headline">Evergraph</span>
+        <span slot="supporting-text">{version}</span>
+        <img
+          src="/favicon.svg"
+          alt="logotype"
+          style="height: 24px"
+          slot="end"
+        />
       </md-list-item>
     </Link>
-    <li divider role="separator"></li>
-    <md-list-item graphic="icon">
-      <slot>FAQ</slot>
-      <md-icon slot="graphic">help_outline</md-icon>
+    <md-divider></md-divider>
+    <md-list-item>
+      <span slot="headline">FAQ</span>
+      <md-icon slot="end">help_outline</md-icon>
     </md-list-item>
     <md-list-item
-      graphic="icon"
+      interactive
       role="button"
+      type="button"
       tabindex="0"
       on:click={loadExampleData}
       on:keypress={loadExampleData}
     >
-      <slot>Load example data</slot>
-      <md-icon slot="graphic">system_update</md-icon>
+      <span slot="headline">Load example data</span>
+      <md-icon slot="end">system_update</md-icon>
     </md-list-item>
     <md-list-item
-      graphic="icon"
+      interactive
       role="button"
+      type="button"
       tabindex="0"
       on:keypress={() => window.location.reload()}
       on:click={() => window.location.reload()}
     >
-      <slot>Reload</slot>
-      <md-icon slot="graphic">cached</md-icon>
+      <span slot="headline">Reload</span>
+      <md-icon slot="end">cached</md-icon>
     </md-list-item>
     <md-list-item
-      graphic="icon"
+      interactive
       role="button"
       tabindex="0"
+      type="button"
       on:click={() => auth.logout()}
       on:keypress={() => auth.logout()}
     >
-      <slot>Sign out</slot>
-      <md-icon slot="graphic">exit_to_app</md-icon>
+      <span slot="headline">Sign out</span>
+      <md-icon slot="end">exit_to_app</md-icon>
     </md-list-item>
   </md-list>
 
   <div slot="appContent">
-    <md-top-app-bar>
+    <mwc-top-app-bar>
       <md-icon-button
-        icon="menu"
         slot="navigationIcon"
         role="button"
         tabindex="0"
+        type="button"
         on:click={openDrawer}
         on:keypress={openDrawer}
-      ></md-icon-button>
+      >
+        <md-icon>menu</md-icon>
+      </md-icon-button>
       <md-textfield slot="title" placeholder="Search"></md-textfield>
       <!-- Content -->
       <md-fab
-        icon="add"
         role="button"
         tabindex="0"
         on:click={openDialog}
         on:keypress={openDialog}
-      ></md-fab>
+      >
+        <md-icon slot="icon">add</md-icon>
+      </md-fab>
       <md-list>
         {#each things as thing, i}
-          <Link href="/view/{i}">
+          <Link to="/view/{i}">
             <Teaser {thing} />
           </Link>
         {/each}
       </md-list>
-    </md-top-app-bar>
+    </mwc-top-app-bar>
   </div>
-</md-drawer>
+</mwc-drawer>
 
 <style>
 </style>

@@ -14,6 +14,7 @@
   import { Link } from "svelte-routing";
   import Teaser from "./Teaser.svelte";
   import { dialogIsOpen } from "../stores.js";
+  import EditStatementDialog from "./EditStatementDialog.svelte";
   const auth = require("solid-auth-client");
 
   const openDialog = () => dialogIsOpen.update(() => true);
@@ -33,6 +34,7 @@
   };
 </script>
 
+<EditStatementDialog />
 <mwc-drawer id="drawer" type="modal">
   <md-list
     on:click={closeDrawer}

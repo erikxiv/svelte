@@ -21,13 +21,11 @@
   const doc = environment.getDocument("default");
   const schema = environment.getDocument("schema");
   doc.then((doc) => {
-    console.log("🤷‍♂️", doc);
     things = doc
       .match(null, RDF.type)
       .filter((q) => q.subject.termType === "NamedNode")
       .toArray()
       .map((q) => q.subject);
-    console.log("🕵️‍♂️", things);
   });
 
   if ("serviceWorker" in navigator) {

@@ -1,6 +1,8 @@
 <script>
   let dialog, subject, predicate, object;
 
+  import "@material/web/dialog/dialog.js";
+  import "@material/web/button/text-button.js";
   import "paper-autocomplete/paper-autocomplete.js";
   import "@polymer/iron-form/iron-form.js";
   import rdfext from "rdf-ext";
@@ -35,6 +37,7 @@
 
     // TODO: Add statement
     console.log(subject.text, predicate.text, object.text);
+    dialog.close();
     return true;
   };
 
@@ -54,46 +57,63 @@
   heading="Add statement"
   on:closed={() => dialogIsOpen.update(() => false)}
 >
-  <div>
-    <iron-form
-      ><form>
-        <paper-autocomplete
-          bind:this={subject}
-          label="subject"
-          required="true"
-          on:keydown|stopPropagation={() => false}
-          text="[]"
-        ></paper-autocomplete>
-        <paper-autocomplete
-          bind:this={predicate}
-          label="predicate"
-          source={allPredicates}
-          required="true"
-          on:keydown|stopPropagation={() => false}
-          showResultsOnFocus="true"
-        ></paper-autocomplete>
-        <paper-autocomplete
-          bind:this={object}
-          label="object"
-          source={allResources}
-          required="true"
-          on:keydown|stopPropagation={() => object.validate()}
-          showResultsOnFocus="true"
-        ></paper-autocomplete>
-      </form></iron-form
+  <iron-form slot="content" method="dialog"
+    ><form id="form-id">
+      <paper-autocomplete
+        aria-controls="dunnoyet"
+        aria-expanded="false"
+        role="combobox"
+        tabindex="0"
+        bind:this={subject}
+        label="subject"
+        required="true"
+        on:keydown|stopPropagation={() => false}
+        text="[]"
+      ></paper-autocomplete>
+      <paper-autocomplete
+        aria-controls="dunnoyet"
+        aria-expanded="false"
+        role="combobox"
+        tabindex="0"
+        bind:this={predicate}
+        label="predicate"
+        source={allPredicates}
+        required="true"
+        on:keydown|stopPropagation={() => false}
+        showResultsOnFocus="true"
+      ></paper-autocomplete>
+      <paper-autocomplete
+        aria-controls="dunnoyet"
+        aria-expanded="false"
+        role="combobox"
+        tabindex="0"
+        bind:this={object}
+        label="object"
+        source={allResources}
+        required="true"
+        on:keydown|stopPropagation={() => object.validate()}
+        showResultsOnFocus="true"
+      ></paper-autocomplete>
+    </form></iron-form
+  >
+  <div slot="actions">
+    <md-text-button
+      role="button"
+      tabindex="0"
+      on:click={(e) => submit() || e.stopPropagation()}
+      on:keypress={(e) => submit() || e.stopPropagation()}
+      value="ok"
+    >
+      Ok
+    </md-text-button>
+    <md-text-button
+      role="button"
+      tabindex="0"
+      on:click={() => dialog.close()}
+      on:keypress={() => dialog.close()}
+      value="cancel">Cancel</md-text-button
     >
   </div>
-  <md-button
-    dialogAction="Next"
-    slot="primaryAction"
-    role="button"
-    tabindex="0"
-    on:click={(e) => submit() || e.stopPropagation()}
-    on:keypress={(e) => submit() || e.stopPropagation()}
-  >
-    ok
-  </md-button>
-  <md-button dialogAction="Cancel" slot="secondaryAction"> cancel </md-button>
 </md-dialog>
 
 <style>

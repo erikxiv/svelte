@@ -18,12 +18,10 @@ const getDocument = (prefix) => {
 };
 
 const loadDocument = async (prefix, mediaType, input, options) => {
-  console.log("📕", prefix);
   byPrefix[prefix] = wrap(rdf.dataset()).import(
     formats.parsers.import(mediaType, input, options)
   );
   byPrefix[prefix] = await byPrefix[prefix];
-  console.log("📗", byPrefix[prefix]);
 };
 
 const saveDocument = async (prefix) => {
